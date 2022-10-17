@@ -19,8 +19,8 @@ data:
         "constantinopleBlock": 0,
         "ibft": {
           "epochlength": 30000,
-          "blockperiodseconds": 2,
-          "requesttimeoutseconds": 4,
+          "blockperiodseconds": 1,
+          "requesttimeoutseconds": 2,
           "policy": 0,
           "ceil2Nby3Block": 0
         },

@@ -75,7 +75,7 @@ spec:
               sleep 30
       containers:
         - name: validator3
-          image: quorumengineering/quorum:latest
+          image: quorumengineering/quorum:22.7.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -139,8 +139,6 @@ spec:
           args:
             - |
               exec 
-              cp /config/static-nodes/static-nodes.json /data/
-              cp /config/permissions-nodes/*.json /data/
               cp /config/quorum/genesis.json /data/
               geth --datadir=/data init /config/quorum/genesis.json
               cp /config/keys/accountkey /data/keystore/key
@@ -150,12 +148,13 @@ spec:
               --datadir /data \
               --nat=any \
               --emitcheckpoints \
-              --verbosity 5 \
+              --revertreason \
+              --verbosity 3 \
               --mine --miner.threads 1 \
               --syncmode full --gcmode archive --nousb \
               --networkid ${QUORUM_NETWORK_ID} \
-              --rpc --rpcaddr 0.0.0.0 --rpcport 8545 --rpccorsdomain "*" --rpcvhosts "*" --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul \
-              --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.origins "*" --ws.api admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul \
+              --http --http.addr 0.0.0.0 --http.port 8545 --http.corsdomain "*" --http.vhosts "*" --http.api admin,eth,debug,miner,net,txpool,personal,web3,istanbul \
+              --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.origins "*" --ws.api admin,eth,debug,miner,net,txpool,personal,web3,istanbul \
               --port 30303 \
               --unlock 0 \
               --allow-insecure-unlock \

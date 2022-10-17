@@ -7,7 +7,12 @@
 - Monitoring via cakeshop in a separate *monitoring* namespace and exposed via NodePort services (ports 30099)
 
 ## Overview of Setup
-![Image quorum](../../images/quorum-privacy.png)
+- genesis
+  - 1초마다 블록 생성
+  - 새로 생성하고 싶은 경우, playground/kubectl/quorum-go/qbft-4v-test의 READ.md 파일을 참조
+- validator1을 bootnode로 설정
+  - validator1에 --nodiscover 옵션 추가 (외부 다른 이더리움 네트워크와의 연결 시도를 하지 않기 위해?)
+  - validator2~4에 bootnodes 설정 추가 (validator1에 연결되도록)
 
 ## NOTE:
 1. There are 4 validators (1 -4)
@@ -38,6 +43,17 @@ Copy the genesis.json file and copy its contents into the configmap/configmap as
 
 #### 3. Update any more config if required
 eg: To alter the number of nodes on the network, alter the `replicas: 2` in the deployments/node-deployments.yaml to suit
+
+```bash
+# exec tptions 
+validator# options: --revertreason  --verbosity 3  --syncmode full --gcmode archive (default)
+
+# test
+validator1 options: --verbosity 5  --syncmode full --gcmode archive
+validator2 options: --verbosity 3  --syncmode full --gcmode archive
+validator3 options: --verbosity 5  --syncmode full (default: --gcmode full)
+validator4 options: --verbosity 3  --syncmode full (default: --gcmode full)
+```
 
 #### 4. Deploy:
 ```bash
