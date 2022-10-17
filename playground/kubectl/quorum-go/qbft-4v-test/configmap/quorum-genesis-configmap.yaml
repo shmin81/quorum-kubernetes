@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: goquorum-genesis-configmap
+  labels:
+    app: goquorum-genesis-configmap
+  namespace: quorum
+data:
+  genesis.json: |-
+    {
+      "nonce": "0x0",
+      "timestamp": "0x58ee40ba",
+      "extraData": "0xf87aa00000000000000000000000000000000000000000000000000000000000000000f85494aab7f76aebdc917a75c6a7d4a33c5a99dd02fc1094bfdddd70aaa2df4f6f7e05853cbaef942e4eb38594d5b18647b5a8cc26a5f55165f159cbe8e2c474af94999cf75479879a06a09b9603c772fed3b1cd328fc080c0",
+      "gasLimit": "0x1FFFFFFF",
+      "gasUsed": "0x0",
+      "number": "0x0",
+      "difficulty": "0x1",
+      "coinbase": "0x0000000000000000000000000000000000000000",
+      "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
+      "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "config": {
+        "chainId": 92022,
+        "homesteadBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "eip155Block": 0,
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "isQuorum": true,
+        "maxCodeSizeConfig": [
+          {
+            "block": 0,
+            "size": 64
+          }
+        ],
+        "txnSizeLimit": 64,
+        "qbft": {
+          "policy": 0,
+          "epoch": 30000,
+          "ceil2Nby3Block": 0,
+          "testQBFTBlock": 0,
+          "blockperiodseconds": 1,
+          "emptyblockperiodseconds": 60
+        }
+      },
+      "alloc": {
+        "0x0ea9ae007a31772e54e2e89dbb6ead89db10a443": {
+          "balance": "1000000000000000000000000000"
+        },
+        "0x25aa39851a3fc1ba307989f5be298fbd261f9a11": {
+          "balance": "1000000000000000000000000000"
+        },
+        "0x6f70db4353be61378c55097cee77d8104b943bd5": {
+          "balance": "1000000000000000000000000000"
+        },
+        "0xe1392ea261a1cd539b8ba619b0303f8562b6df61": {
+          "balance": "1000000000000000000000000000"
+        },
+        "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73": {
+          "balance": "1000000000000000000000000000"
+        }
+      }
+    }
