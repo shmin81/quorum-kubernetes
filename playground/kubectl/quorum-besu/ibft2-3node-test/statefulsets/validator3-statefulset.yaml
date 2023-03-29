@@ -54,7 +54,7 @@ spec:
       labels:
         app: validator3
       annotations:
-        prometheus.io/scrape: "false"
+        prometheus.io/scrape: "true"
         prometheus.io/port: "9545"
         prometheus.io/path: "/metrics"
     spec:

@@ -5,3 +5,7 @@ kubectl apply -f services/
 kubectl apply -f not_yet/
 kubectl apply -f deployments/
 kubectl apply -f statefulsets/
+
+#
+# kubectl apply -f blockscout/blockscout-deployment.yaml
+# kubectl delete -f blockscout/blockscout-deployment.yaml

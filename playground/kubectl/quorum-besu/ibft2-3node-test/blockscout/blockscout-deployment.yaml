@@ -22,11 +22,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              cpu: 500m
-              memory: 1024Mi
+              cpu: 2048m
+              memory: 2048Mi
             limits:
-              cpu: 500m
-              memory: 1024Mi
+              cpu: 4096m
+              memory: 4096Mi
           env:
             - name: POD_IP
               valueFrom:
