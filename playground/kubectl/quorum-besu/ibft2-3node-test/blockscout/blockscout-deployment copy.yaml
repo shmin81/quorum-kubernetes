@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockscout
+  labels:
+    app: blockscout
+  namespace: blockscout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blockscout
+  template:
+    metadata:
+      labels:
+        app: blockscout
+    spec:
+      containers:
+        - name: blockscout
+          image: blockscout/blockscout:4.1.2
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 300m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: COIN
+              value: eth
+            - name: DATABASE_URL
+              value: "postgres://postgreuser:postgrepw@db-postgre.blockscout:5432/blockscout?ssl=false"
+            - name: DISABLE_INDEXER
+              value: "false"
+            - name: ECTO_USE_SSL
+              value: "false"
+            - name: ETHEREUM_JSONRPC_HTTP_URL
+              value: "http://besu-validator1.besu:8545/"
+            - name: ETHEREUM_JSONRPC_TRACE_URL
+              value: "http://besu-validator1.besu:8545/"
+            - name: ETHEREUM_JSONRPC_TRANSPORT
+              value: "http"
+            - name: ETHEREUM_JSONRPC_VARIANT
+              value: "besu"
+            - name: ETHEREUM_JSONRPC_WS_URL
+              value: "ws://besu-validator1.besu:8546/"
+            - name: NETWORK
+              value: "chainz"
+          ports:
+            - containerPort: 4000
+              name: http
+              protocol: TCP
+      restartPolicy: Always

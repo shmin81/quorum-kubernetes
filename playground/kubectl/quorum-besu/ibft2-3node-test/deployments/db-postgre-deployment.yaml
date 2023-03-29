@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgre
+  labels:
+    app: postgre
+  namespace: blockscout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgre
+  template:
+    metadata:
+      labels:
+        app: postgre
+    spec:
+      containers:
+        - name: postgre
+          image: postgres:13.6
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 300m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: "trust"
+            - name: POSTGRES_PASSWORD
+              value: "postgrepw"
+            - name: POSTGRES_USER
+              value: "postgreuser"
+            - name: POSTGRES_DB
+              value: blockscout
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+          ports:
+            - containerPort: 5432
+      volumes:
+        - name: db-data
+          emptyDir:
+            sizeLimit: "30Gi"
