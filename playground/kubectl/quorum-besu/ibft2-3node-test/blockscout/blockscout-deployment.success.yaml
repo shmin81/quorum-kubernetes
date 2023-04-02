@@ -18,15 +18,17 @@ spec:
     spec:
       containers:
         - name: blockscout
+          #image: blockscout/blockscout:4.1.2
+          #image: cogod144/blockscout:v5.1.2
           image: blockscout/blockscout:5.1.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              cpu: 1024m
-              memory: 1024Mi
-            limits:
               cpu: 2048m
               memory: 2048Mi
+            limits:
+              cpu: 2048m
+              memory: 4096Mi
           env:
             - name: ENABLE_RUST_VERIFICATION_SERVICE
               value: "false"

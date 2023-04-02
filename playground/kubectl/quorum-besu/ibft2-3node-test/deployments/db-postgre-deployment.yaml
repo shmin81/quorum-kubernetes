@@ -18,11 +18,11 @@ spec:
     spec:
       containers:
         - name: postgre
-          image: postgres:13.6
+          image: postgres:14
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              cpu: 300m
+              cpu: 500m
               memory: 512Mi
             limits:
               cpu: 500m
@@ -39,9 +39,9 @@ spec:
             - name: POSTGRES_HOST_AUTH_METHOD
               value: "trust"
             - name: POSTGRES_PASSWORD
-              value: "postgrepw"
+              value: "postgre"
             - name: POSTGRES_USER
-              value: "postgreuser"
+              value: "postgre"
             - name: POSTGRES_DB
               value: blockscout
           volumeMounts:

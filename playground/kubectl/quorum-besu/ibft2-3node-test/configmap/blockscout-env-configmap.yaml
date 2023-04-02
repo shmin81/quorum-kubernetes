@@ -33,7 +33,7 @@ data:
   COIN: eth
   COIN_BALANCE_HISTORY_DAYS: "90"
   CUSTOM_CONTRACT_ADDRESSES_TEST_TOKEN: ""
-  DATABASE_URL: postgresql://postgreuser:postgrepw@db-postgre.blockscout:5432/blockscout?ssl=false
+  DATABASE_URL: postgresql://postgre:postgre@db-postgre.blockscout:5432/blockscout?ssl=false
   DISABLE_BRIDGE_MARKET_CAP_UPDATER: "true"
   DISABLE_EXCHANGE_RATES: "true"
   DISABLE_INDEXER: "false"
