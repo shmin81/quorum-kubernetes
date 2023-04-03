@@ -18,11 +18,11 @@ spec:
       targetPort: 30303
       protocol: TCP
       name: rlpx
-    - port: 8545
-      targetPort: 8545
-      protocol: TCP
-      name: json-rpc
-    - port: 8546
-      targetPort: 8546
-      protocol: TCP
-      name: ws
+    # - port: 8545
+    #   targetPort: 8545
+    #   protocol: TCP
+    #   name: json-rpc
+    # - port: 8546
+    #   targetPort: 8546
+    #   protocol: TCP
+    #   name: ws
