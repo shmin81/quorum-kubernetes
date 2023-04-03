@@ -139,7 +139,7 @@ data:
   #TESTNET_LABEL_TEXT: "Testnet"
   SUPPORTED_CHAINS: '{}'
   APPS_MENU: "false" # need??
-  #APPS: ""
+  APPS: ""
 
   ### Footer management
   LOGO_FOOTER: /images/blockscout_logo.svg
@@ -186,18 +186,18 @@ data:
   
   ### Smart-contract verifier
   ENABLE_RUST_VERIFICATION_SERVICE: "false"
-  RUST_VERIFICATION_SERVICE_URL: ""
-  #RUST_VERIFICATION_SERVICE_URL: "http://smart-contract-verifier.blockscout:8050"
+  #RUST_VERIFICATION_SERVICE_URL: ""
+  RUST_VERIFICATION_SERVICE_URL: "http://smart-contract-verifier.blockscout:8050"
 
   ### Sol2Uml
   VISUALIZE_SOL2UML_ENABLED: "false"
-  VISUALIZE_SOL2UML_SERVICE_URL: ""
-  #VISUALIZE_SOL2UML_SERVICE_URL: "http://visualizer.blockscout:8050"
+  #VISUALIZE_SOL2UML_SERVICE_URL: ""
+  VISUALIZE_SOL2UML_SERVICE_URL: "http://visualizer.blockscout:8050"
 
   ### Sig-provider
   SIG_PROVIDER_ENABLED: "false"
-  SIG_PROVIDER_SERVICE_URL: ""
-  #SIG_PROVIDER_SERVICE_URL: "http://sig-provider.blockscout:8050"
+  #SIG_PROVIDER_SERVICE_URL: ""
+  SIG_PROVIDER_SERVICE_URL: "http://sig-provider.blockscout:8050"
 
   ### Sourcify
   ### Tenderly

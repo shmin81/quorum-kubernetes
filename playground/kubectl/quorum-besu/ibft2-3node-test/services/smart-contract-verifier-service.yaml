@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: smart-contract-verifier
+  name: smart-contract-verifier1
   labels:
-    app: smart-contract-verifier
+    app: smart-contract-verifier1
   namespace: blockscout
 spec:
   type: NodePort
@@ -15,3 +15,21 @@ spec:
       nodePort: 30150
       protocol: TCP
       name: blockscout
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smart-contract-verifier
+  labels:
+    app: smart-contract-verifier
+  namespace: blockscout
+spec:
+  type: ClusterIP
+  selector:
+    app: smart-contract-verifier
+  ports:
+    - port: 8050
+      targetPort: 8050
+      protocol: TCP
+      name: http

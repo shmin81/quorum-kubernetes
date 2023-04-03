@@ -240,6 +240,11 @@ spec:
                 configMapKeyRef:
                   key: APPS_MENU
                   name: common-blockscout-env
+            - name: APPS
+              valueFrom:
+                configMapKeyRef:
+                  key: APPS
+                  name: common-blockscout-env
             # Footer management
             - name: LOGO_FOOTER
               valueFrom:
