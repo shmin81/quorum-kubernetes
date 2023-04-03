@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-contract-verifier
+  labels:
+    app: smart-contract-verifier
+  namespace: blockscout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smart-contract-verifier
+  template:
+    metadata:
+      labels:
+        app: smart-contract-verifier
+    spec:
+      containers:
+        - name: smart-contract-verifier
+          image: ghcr.io/blockscout/smart-contract-verifier:main
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 256m
+              memory: 256Mi
+            limits:
+              cpu: 512m
+              memory: 512Mi
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: SMART_CONTRACT_VERIFIER__SERVER__HTTP__ENABLED
+              value: "true"
+            - name: SMART_CONTRACT_VERIFIER__SERVER__HTTP__ADDR
+              value: "0.0.0.0:8050"
+            - name: SMART_CONTRACT_VERIFIER__SERVER__HTTP__MAX_BODY_SIZE
+              value: "2097152"
+            - name: SMART_CONTRACT_VERIFIER__SERVER__GRPC__ENABLED
+              value: "false"
+            - name: SMART_CONTRACT_VERIFIER__SERVER__GRPC__ADDR
+              value: "0.0.0.0:8051"
+            - name: SMART_CONTRACT_VERIFIER__SOLIDITY__ENABLED
+              value: "true"
+            - name: SMART_CONTRACT_VERIFIER__SOLIDITY__COMPILERS_DIR
+              value: "/tmp/solidity-compilers"
+            - name: SMART_CONTRACT_VERIFIER__SOLIDITY__REFRESH_VERSIONS_SCHEDULE
+              value: "0 0 * * * * *"
+            - name: SMART_CONTRACT_VERIFIER__SOLIDITY__FETCHER__LIST__LIST_URL
+              value: "https://solc-bin.ethereum.org/linux-amd64/list.json"
+            - name: SMART_CONTRACT_VERIFIER__VYPER__ENABLED
+              value: "true"
+            - name: SMART_CONTRACT_VERIFIER__VYPER__COMPILERS_DIR
+              value: "/tmp/vyper-compilers"
+            - name: SMART_CONTRACT_VERIFIER__VYPER__REFRESH_VERSIONS_SCHEDULE
+              value: "0 0 * * * * *"
+            - name: SMART_CONTRACT_VERIFIER__VYPER__FETCHER__LIST__LIST_URL
+              value: "https://raw.githubusercontent.com/blockscout/solc-bin/main/vyper.list.json"
+            - name: SMART_CONTRACT_VERIFIER__SOURCIFY__ENABLED
+              value: "true"
+            - name: SMART_CONTRACT_VERIFIER__SOURCIFY__API_URL
+              value: "https://sourcify.dev/server/"
+            - name: SMART_CONTRACT_VERIFIER__SOURCIFY__VERIFICATION_ATTEMPTS
+              value: "3"
+            - name: SMART_CONTRACT_VERIFIER__SOURCIFY__REQUEST_TIMEOUT
+              value: "20"
+            - name: SMART_CONTRACT_VERIFIER__METRICS__ENABLED
+              value: "true"
+            - name: SMART_CONTRACT_VERIFIER__METRICS__ADDR
+              value: "0.0.0.0:6060"
+            - name: SMART_CONTRACT_VERIFIER__METRICS__ROUTE
+              value: "/metrics"
+            - name: SMART_CONTRACT_VERIFIER__JAEGER__ENABLED
+              value: "false"
+            - name: SMART_CONTRACT_VERIFIER__JAEGER__AGENT_ENDPOINT
+              value: "localhost:6831"
+          ports:
+            - containerPort: 8050
+              name: http
+              protocol: TCP
+      restartPolicy: Always
