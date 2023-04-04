@@ -206,11 +206,52 @@ spec:
                 configMapKeyRef:
                   key: INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER
                   name: common-blockscout-env
+            - name: INDEXER_MEMORY_LIMIT
+              valueFrom:
+                configMapKeyRef:
+                  key: INDEXER_MEMORY_LIMIT
+                  name: common-blockscout-env
+            - name: INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE
+              value: "10"
+            - name: INDEXER_CATCHUP_BLOCKS_BATCH_SIZE
+              value: "4"
+            - name: INDEXER_CATCHUP_BLOCKS_CONCURRENCY
+              value: "4"
+
+            - name: INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE
+              value: "5"
+            - name: INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY
+              value: "2"
+            - name: INDEXER_BLOCK_REWARD_BATCH_SIZE
+              value: "5"
+            - name: INDEXER_BLOCK_REWARD_CONCURRENCY
+              value: "2"
+            - name: INDEXER_TOKEN_INSTANCE_BATCH_SIZE
+              value: "1"
+            - name: INDEXER_TOKEN_INSTANCE_CONCURRENCY
+              value: "4"
+            - name: INDEXER_RECEIPTS_BATCH_SIZE
+              value: "50"
+            - name: INDEXER_RECEIPTS_CONCURRENCY
+              value: "4"
+            - name: INDEXER_COIN_BALANCES_BATCH_SIZE
+              value: "50"
+            - name: INDEXER_COIN_BALANCES_CONCURRENCY
+              value: "2"
+
+            - name: INDEXER_TX_ACTIONS_ENABLE
+              value: "true"
+
             # Exchange rates management
             - name: DISABLE_EXCHANGE_RATES
               valueFrom:
                 configMapKeyRef:
                   key: DISABLE_EXCHANGE_RATES
+                  name: common-blockscout-env
+            - name: DISABLE_TOKEN_EXCHANGE_RATE
+              valueFrom:
+                configMapKeyRef:
+                  key: DISABLE_TOKEN_EXCHANGE_RATE
                   name: common-blockscout-env
             # Main page dashboard management
             - name: GAS_PRICE
@@ -279,16 +320,21 @@ spec:
                 configMapKeyRef:
                   key: BLOCKSCOUT_VERSION
                   name: common-blockscout-env
+            - name: FOOTER_ENABLE_FORUM_LINK
+              value: "false"
+            - name: FOOTER_GITHUB_LINK
+              value: "true"
             - name: LINK_TO_OTHER_EXPLORERS
-              valueFrom:
-                configMapKeyRef:
-                  key: LINK_TO_OTHER_EXPLORERS
-                  name: common-blockscout-env
-            - name: OTHER_EXPLORERS
-              valueFrom:
-                configMapKeyRef:
-                  key: OTHER_EXPLORERS
-                  name: common-blockscout-env
+              value: "false"
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: LINK_TO_OTHER_EXPLORERS
+            #       name: common-blockscout-env
+            # - name: OTHER_EXPLORERS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: OTHER_EXPLORERS
+            #       name: common-blockscout-env
             # Contract management
             - name: CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS
               valueFrom:
