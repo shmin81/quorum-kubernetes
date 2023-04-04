@@ -15,4 +15,3 @@ spec:
       nodePort: 31000
       protocol: TCP
       name: db-postgre
-

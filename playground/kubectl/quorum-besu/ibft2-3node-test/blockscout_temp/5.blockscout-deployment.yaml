@@ -1,0 +1,374 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockscout
+  labels:
+    app: blockscout
+  namespace: blockscout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blockscout
+  template:
+    metadata:
+      labels:
+        app: blockscout
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "4000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: blockscout
+          image: blockscout/blockscout:5.1.2
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 1024m
+              memory: 1536Mi
+            limits:
+              cpu: 2048m
+              memory: 2048Mi
+          env:
+            #- name: SECRET_KEY_BASE
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_URL
+                  name: common-blockscout-env
+            - name: ETHEREUM_JSONRPC_VARIANT
+              valueFrom:
+                configMapKeyRef:
+                  key: ETHEREUM_JSONRPC_VARIANT
+                  name: common-blockscout-env
+            - name: ETHEREUM_JSONRPC_HTTP_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ETHEREUM_JSONRPC_HTTP_URL
+                  name: common-blockscout-env
+            - name: ETHEREUM_JSONRPC_TRACE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ETHEREUM_JSONRPC_TRACE_URL
+                  name: common-blockscout-env
+            - name: ETHEREUM_JSONRPC_WS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ETHEREUM_JSONRPC_WS_URL
+                  name: common-blockscout-env
+            - name: ETHEREUM_JSONRPC_TRANSPORT
+              valueFrom:
+                configMapKeyRef:
+                  key: ETHEREUM_JSONRPC_TRANSPORT
+                  name: common-blockscout-env
+            - name: ETHEREUM_JSONRPC_HTTP_TIMEOUT
+              valueFrom:
+                configMapKeyRef:
+                  key: ETHEREUM_JSONRPC_HTTP_TIMEOUT
+                  name: common-blockscout-env
+            - name: NETWORK
+              valueFrom:
+                configMapKeyRef:
+                  key: NETWORK
+                  name: common-blockscout-env
+            - name: SUBNETWORK
+              valueFrom:
+                configMapKeyRef:
+                  key: SUBNETWORK
+                  name: common-blockscout-env
+            - name: NETWORK_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: NETWORK_PATH
+                  name: common-blockscout-env
+            - name: BLOCKSCOUT_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: BLOCKSCOUT_HOST
+                  name: common-blockscout-env
+            - name: BLOCKSCOUT_PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  key: BLOCKSCOUT_PROTOCOL
+                  name: common-blockscout-env
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PORT
+                  name: common-blockscout-env
+            - name: COIN
+              valueFrom:
+                configMapKeyRef:
+                  key: COIN
+                  name: common-blockscout-env
+            - name: COIN_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: COIN_NAME
+                  name: common-blockscout-env
+            - name: EMISSION_FORMAT
+              valueFrom:
+                configMapKeyRef:
+                  key: EMISSION_FORMAT
+                  name: common-blockscout-env
+            - name: POOL_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  key: POOL_SIZE
+                  name: common-blockscout-env
+            - name: POOL_SIZE_API
+              valueFrom:
+                configMapKeyRef:
+                  key: POOL_SIZE_API
+                  name: common-blockscout-env
+            - name: ECTO_USE_SSL
+              valueFrom:
+                configMapKeyRef:
+                  key: ECTO_USE_SSL
+                  name: common-blockscout-env
+            - name: HEART_BEAT_TIMEOUT
+              valueFrom:
+                configMapKeyRef:
+                  key: HEART_BEAT_TIMEOUT
+                  name: common-blockscout-env
+            - name: DISABLE_WEBAPP
+              valueFrom:
+                configMapKeyRef:
+                  key: DISABLE_WEBAPP
+                  name: common-blockscout-env
+            - name: DISABLE_READ_API
+              valueFrom:
+                configMapKeyRef:
+                  key: DISABLE_READ_API
+                  name: common-blockscout-env
+            - name: DISABLE_WRITE_API
+              valueFrom:
+                configMapKeyRef:
+                  key: DISABLE_WRITE_API
+                  name: common-blockscout-env
+            - name: WOBSERVER_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: WOBSERVER_ENABLED
+                  name: common-blockscout-env
+            - name: CHECKSUM_ADDRESS_HASHES
+              valueFrom:
+                configMapKeyRef:
+                  key: CHECKSUM_ADDRESS_HASHES
+                  name: common-blockscout-env
+            - name: CHECKSUM_FUNCTION
+              valueFrom:
+                configMapKeyRef:
+                  key: CHECKSUM_FUNCTION
+                  name: common-blockscout-env
+            # Indexer management
+            - name: BLOCK_TRANSFORMER
+              valueFrom:
+                configMapKeyRef:
+                  key: BLOCK_TRANSFORMER
+                  name: common-blockscout-env
+            - name: DISABLE_INDEXER
+              valueFrom:
+                configMapKeyRef:
+                  key: DISABLE_INDEXER
+                  name: common-blockscout-env
+            - name: INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER
+              valueFrom:
+                configMapKeyRef:
+                  key: INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER
+                  name: common-blockscout-env
+            - name: INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER
+              valueFrom:
+                configMapKeyRef:
+                  key: INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER
+                  name: common-blockscout-env
+            # Exchange rates management
+            - name: DISABLE_EXCHANGE_RATES
+              valueFrom:
+                configMapKeyRef:
+                  key: DISABLE_EXCHANGE_RATES
+                  name: common-blockscout-env
+            # Main page dashboard management
+            - name: GAS_PRICE
+              valueFrom:
+                configMapKeyRef:
+                  key: GAS_PRICE
+                  name: common-blockscout-env
+            - name: ENABLE_TXS_STATS
+              valueFrom:
+                configMapKeyRef:
+                  key: ENABLE_TXS_STATS
+                  name: common-blockscout-env
+            - name: SHOW_PRICE_CHART
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_PRICE_CHART
+                  name: common-blockscout-env
+            - name: SHOW_TXS_CHART
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_TXS_CHART
+                  name: common-blockscout-env
+            - name: HISTORY_FETCH_INTERVAL
+              valueFrom:
+                configMapKeyRef:
+                  key: HISTORY_FETCH_INTERVAL
+                  name: common-blockscout-env
+            # Header management
+            - name: LOGO
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGO
+                  name: common-blockscout-env
+            - name: SUPPORTED_CHAINS
+              valueFrom:
+                configMapKeyRef:
+                  key: SUPPORTED_CHAINS
+                  name: common-blockscout-env
+            - name: APPS_MENU
+              valueFrom:
+                configMapKeyRef:
+                  key: APPS_MENU
+                  name: common-blockscout-env
+            - name: APPS
+              valueFrom:
+                configMapKeyRef:
+                  key: APPS
+                  name: common-blockscout-env
+            # Footer management
+            - name: LOGO_FOOTER
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGO_FOOTER
+                  name: common-blockscout-env
+            - name: RELEASE_LINK
+              valueFrom:
+                configMapKeyRef:
+                  key: RELEASE_LINK
+                  name: common-blockscout-env
+            - name: BLOCKSCOUT_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  key: BLOCKSCOUT_VERSION
+                  name: common-blockscout-env
+            - name: LINK_TO_OTHER_EXPLORERS
+              valueFrom:
+                configMapKeyRef:
+                  key: LINK_TO_OTHER_EXPLORERS
+                  name: common-blockscout-env
+            - name: OTHER_EXPLORERS
+              valueFrom:
+                configMapKeyRef:
+                  key: OTHER_EXPLORERS
+                  name: common-blockscout-env
+            # Contract management
+            - name: CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS
+              valueFrom:
+                configMapKeyRef:
+                  key: CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS
+                  name: common-blockscout-env
+            - name: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
+              valueFrom:
+                configMapKeyRef:
+                  key: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
+                  name: common-blockscout-env
+            # Misc UI management
+            - name: SHOW_ADDRESS_MARKETCAP_PERCENTAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_ADDRESS_MARKETCAP_PERCENTAGE
+                  name: common-blockscout-env
+            - name: SHOW_MAINTENANCE_ALERT
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_MAINTENANCE_ALERT
+                  name: common-blockscout-env
+            - name: MAINTENANCE_ALERT_MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: MAINTENANCE_ALERT_MESSAGE
+                  name: common-blockscout-env
+            - name: HIDE_BLOCK_MINER
+              valueFrom:
+                configMapKeyRef:
+                  key: HIDE_BLOCK_MINER
+                  name: common-blockscout-env
+            - name: DISPLAY_TOKEN_ICONS
+              valueFrom:
+                configMapKeyRef:
+                  key: DISPLAY_TOKEN_ICONS
+                  name: common-blockscout-env
+            - name: UNCLES_IN_AVERAGE_BLOCK_TIME
+              valueFrom:
+                configMapKeyRef:
+                  key: UNCLES_IN_AVERAGE_BLOCK_TIME
+                  name: common-blockscout-env
+            - name: COIN_BALANCE_HISTORY_DAYS
+              valueFrom:
+                configMapKeyRef:
+                  key: COIN_BALANCE_HISTORY_DAYS
+                  name: common-blockscout-env
+            - name: ADMIN_PANEL_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: ADMIN_PANEL_ENABLED
+                  name: common-blockscout-env
+            # API rate limit management
+            # Specific smart-contracts
+            # Account-related ENV variables
+            - name: ACCOUNT_ENABLED
+              value: "false"
+            # Smart-contract verifier
+            - name: ENABLE_RUST_VERIFICATION_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  key: ENABLE_RUST_VERIFICATION_SERVICE
+                  name: common-blockscout-env
+            - name: RUST_VERIFICATION_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: RUST_VERIFICATION_SERVICE_URL
+                  name: common-blockscout-env
+            # Sol2Uml
+            - name: VISUALIZE_SOL2UML_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: VISUALIZE_SOL2UML_ENABLED
+                  name: common-blockscout-env
+            - name: VISUALIZE_SOL2UML_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VISUALIZE_SOL2UML_SERVICE_URL
+                  name: common-blockscout-env
+            # Sig-provider
+            - name: SIG_PROVIDER_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: SIG_PROVIDER_ENABLED
+                  name: common-blockscout-env
+            - name: SIG_PROVIDER_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SIG_PROVIDER_SERVICE_URL
+                  name: common-blockscout-env
+            
+          ports:
+            - containerPort: 4000
+              name: http
+              protocol: TCP
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - bin/blockscout eval "Elixir.Explorer.ReleaseTasks.create_and_migrate()" && bin/blockscout start
+      restartPolicy: Always
