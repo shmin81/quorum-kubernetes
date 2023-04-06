@@ -21,13 +21,13 @@ spec:
           image: postgres:14
           imagePullPolicy: IfNotPresent
           # 공유 버퍼의 크기는 기본 32M 이지만, 서버 메모리 기준으로 1/4 ~ 1/2 정도로 할당
-          args: ["-c", "shared_buffers=128MB", "-c", "max_connections=200"]
+          args: ["-c", "shared_buffers=256MB", "-c", "max_connections=200"]
           resources:
             requests:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 1024m
+              memory: 1024Mi
             limits:
-              cpu: 500m
+              cpu: 1024m
               memory: 1024Mi
           env:
             - name: POD_IP

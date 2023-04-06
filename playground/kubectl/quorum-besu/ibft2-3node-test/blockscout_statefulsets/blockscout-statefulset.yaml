@@ -453,6 +453,8 @@ spec:
           command:
             - /bin/sh
             - -c
+          #args:
+          #  - tail -f /dev/null
           args:
             - bin/blockscout eval "Elixir.Explorer.ReleaseTasks.create_and_migrate()" && bin/blockscout start
       #restartPolicy: OnFailure
