@@ -83,7 +83,7 @@ data:
   #TRACE_LAST_BLOCK: ""
   #BLOCK_RANGES: ??
   #FETCH_REWARDS_WAY: "trace_block"
-  #ETHEREUM_JSONRPC_DEBUG_TRACE_TRANSACTION_TIMEOUT: "5s"
+  #ETHEREUM_JSONRPC_DEBUG_TRACE_TRANSACTION_TIMEOUT: "5s" # geth에서만 사용되는 듯
   #ETHEREUM_JSONRPC_DISABLE_ARCHIVE_BALANCES: "false"
   #ETHEREUM_JSONRPC_PENDING_TRANSACTIONS_TYPE: "default"  # how to besu??
   #
@@ -99,7 +99,7 @@ data:
   #V INDEXER_COIN_BALANCES_BATCH_SIZE: "500"
   #V INDEXER_COIN_BALANCES_CONCURRENCY: "4"
   #
-  #V INDEXER_TX_ACTIONS_ENABLE: "false"
+  #V INDEXER_TX_ACTIONS_ENABLE: "false" # 무슨 기능일까??
   #INDEXER_TX_ACTIONS_MAX_TOKEN_CACHE_SIZE: "100000"
   #INDEXER_TX_ACTIONS_REINDEX_FIRST_BLOCK: ""
   #INDEXER_TX_ACTIONS_REINDEX_LAST_BLOCK: ""
@@ -117,19 +117,19 @@ data:
   #CACHE_TXS_COUNT_PERIOD: "2h"
   # ...
 
-  ### Gas price oracle management (리소스 최소화 방안은 ??)
-  #GAS_PRICE_ORACLE_NUM_OF_BLOCKS: "200"
+  ### Gas price oracle management (price가 0이므로 리소스 최소화 방안은 ??)
+  #V GAS_PRICE_ORACLE_NUM_OF_BLOCKS: "2" # default: 200
   #GAS_PRICE_ORACLE_SAFELOW_PERCENTILE: "35"
   #GAS_PRICE_ORACLE_AVERAGE_PERCENTILE: "60"
   #GAS_PRICE_ORACLE_FAST_PERCENTILE: "90"
-  #GAS_PRICE_ORACLE_CACHE_PERIOD: "30s"
+  #V GAS_PRICE_ORACLE_CACHE_PERIOD: "1h" # default: 30s
 
   ### Main page dashboard management
   GAS_PRICE: "0" # ()
   ENABLE_TXS_STATS: "true"
   SHOW_PRICE_CHART: "false"
   SHOW_TXS_CHART: "true"
-  HISTORY_FETCH_INTERVAL: "20m" # default 1h
+  HISTORY_FETCH_INTERVAL: "30m" # default 1h => 무엇에 대한 내용?
   #TXS_HISTORIAN_INIT_LAG: "0"
   #TXS_STATS_DAYS_TO_COMPILE_AT_INIT: "32" # 메인 페이지의 일별 txs 수 기록 차트에 표시하기 위해 일별 txs 수 기록을 가져오는 일수입니다.
 
@@ -154,19 +154,19 @@ data:
 
   ### Contract management
   CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS: "homestead, tangerineWhistle, spuriousDragon, byzantium, constantinople, petersburg, istanbul"
-  #CONTRACT_VERIFICATION_MAX_LIBRARIES: ""
+  #CONTRACT_VERIFICATION_MAX_LIBRARIES: "" # default 10
   CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING: "2040"
-  #CONTRACT_DISABLE_INTERACTION: ""
+  #CONTRACT_DISABLE_INTERACTION: "" # default false
 
   ### Misc UI management
   SHOW_ADDRESS_MARKETCAP_PERCENTAGE: "false" # 수정
   SHOW_MAINTENANCE_ALERT: "false"
   MAINTENANCE_ALERT_MESSAGE: ""  # 익스플로러 상단 공지사항의 메시지 텍스트입니다.
   HIDE_BLOCK_MINER: "false"  # 값이 'true'인 경우 블록 페이지 및 타일에서 광부/검증기/시퀀서를 숨깁니다.
-  DISPLAY_TOKEN_ICONS: "true" # true인 경우 TrustWallet 자산 저장소의 토큰 아이콘을 표시합니다.
-  UNCLES_IN_AVERAGE_BLOCK_TIME: "false" 
-  COIN_BALANCE_HISTORY_DAYS: "10" # default 10 : 
-  ADMIN_PANEL_ENABLED: "true"  # (for test)
+  DISPLAY_TOKEN_ICONS: "false" # true인 경우 TrustWallet 자산 저장소의 토큰 아이콘을 표시합니다.
+  UNCLES_IN_AVERAGE_BLOCK_TIME: "false" # 우리는 엉클블록이 없음
+  COIN_BALANCE_HISTORY_DAYS: "10" # default 10 : token 창의 하단 메뉴 중 하나에 관련된 것인듯? -> DB 조회 조건
+  ADMIN_PANEL_ENABLED: "false"  # 
   #DISABLE_ADD_TO_MM_BUTTON: "true" # (for test) true인 경우 "MM에 체인 추가" 버튼이 나타나지 않습니다.
   #PERMANENT_DARK_MODE_ENABLED: "false" 
   #PERMANENT_LIGHT_MODE_ENABLED: "false"

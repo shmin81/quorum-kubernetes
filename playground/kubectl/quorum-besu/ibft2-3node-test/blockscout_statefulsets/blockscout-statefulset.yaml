@@ -253,6 +253,11 @@ spec:
                 configMapKeyRef:
                   key: DISABLE_TOKEN_EXCHANGE_RATE
                   name: common-blockscout-env
+            # Gas price oracle management
+            - name: GAS_PRICE_ORACLE_NUM_OF_BLOCKS
+              value: "2"
+            - name: GAS_PRICE_ORACLE_CACHE_PERIOD
+              value: "1h"
             # Main page dashboard management
             - name: GAS_PRICE
               valueFrom:
