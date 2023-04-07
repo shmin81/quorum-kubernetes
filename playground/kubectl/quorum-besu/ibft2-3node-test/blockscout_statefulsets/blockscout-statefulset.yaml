@@ -28,10 +28,10 @@ spec:
           resources:
             requests:
               cpu: 1024m
-              memory: 1536Mi
+              memory: 1024Mi
             limits:
-              cpu: 2048m
-              memory: 2048Mi
+              cpu: 1024m
+              memory: 1536Mi
           env:
             #- name: SECRET_KEY_BASE
             - name: POD_IP
@@ -184,7 +184,7 @@ spec:
             - name: TOKEN_ID_MIGRATION_CONCURRENCY
               value: "1"
             - name: TOKEN_ID_MIGRATION_BATCH_SIZE
-              value: "100"
+              value: "50"
             # Indexer management
             - name: BLOCK_TRANSFORMER
               valueFrom:
@@ -205,6 +205,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER
+                  name: common-blockscout-env
+            - name: INDEXER_DISABLE_BLOCK_REWARD_FETCHER
+              valueFrom:
+                configMapKeyRef:
+                  key: INDEXER_DISABLE_BLOCK_REWARD_FETCHER
                   name: common-blockscout-env
             - name: INDEXER_MEMORY_LIMIT
               valueFrom:
@@ -238,9 +243,9 @@ spec:
               value: "50"
             - name: INDEXER_COIN_BALANCES_CONCURRENCY
               value: "2"
-
+            # what?? need??
             - name: INDEXER_TX_ACTIONS_ENABLE
-              value: "true"
+              value: "false"
 
             # Exchange rates management
             - name: DISABLE_EXCHANGE_RATES
@@ -257,7 +262,7 @@ spec:
             - name: GAS_PRICE_ORACLE_NUM_OF_BLOCKS
               value: "2"
             - name: GAS_PRICE_ORACLE_CACHE_PERIOD
-              value: "1h"
+              value: "2h"
             # Main page dashboard management
             - name: GAS_PRICE
               valueFrom:
@@ -283,6 +288,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: HISTORY_FETCH_INTERVAL
+                  name: common-blockscout-env
+            - name: TXS_STATS_DAYS_TO_COMPILE_AT_INIT
+              valueFrom:
+                configMapKeyRef:
+                  key: TXS_STATS_DAYS_TO_COMPILE_AT_INIT
                   name: common-blockscout-env
             # Header management
             - name: LOGO
@@ -350,6 +360,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
+                  name: common-blockscout-env
+            - name: CONTRACT_DISABLE_INTERACTION
+              valueFrom:
+                configMapKeyRef:
+                  key: CONTRACT_DISABLE_INTERACTION
                   name: common-blockscout-env
             # Misc UI management
             - name: SHOW_ADDRESS_MARKETCAP_PERCENTAGE

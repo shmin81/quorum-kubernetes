@@ -25,7 +25,7 @@ spec:
               cpu: 256m
               memory: 256Mi
             limits:
-              cpu: 512m
+              cpu: 256m
               memory: 512Mi
           env:
             - name: POD_IP

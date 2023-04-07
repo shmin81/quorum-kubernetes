@@ -19,7 +19,7 @@ data:
   ETHEREUM_JSONRPC_HTTP_INSECURE: "true" # false??
   ETHEREUM_JSONRPC_HTTP_TIMEOUT: "60"
   NETWORK: Local
-  SUBNETWORK: Chainz Testnet
+  SUBNETWORK: Chainz Dev Testnet
   ## IPC_PATH: "" 
   NETWORK_PATH: / 
   BLOCKSCOUT_HOST: "" # localhost
@@ -67,10 +67,11 @@ data:
   DISABLE_INDEXER: "false"
   INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "false" # not need?
   INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER: "false"
-  #INDEXER_DISABLE_BLOCK_REWARD_FETCHER: "false" # not need?
+  INDEXER_DISABLE_BLOCK_REWARD_FETCHER: "true" # not need?
   #INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER: "false"
   #INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER: "false" # not need?
-  INDEXER_MEMORY_LIMIT: "1gb" # need higher
+  #INDEXER_MEMORY_LIMIT: "1gb" # need higher
+  INDEXER_MEMORY_LIMIT: "512mb" # need higher (mb, gb 만 가능한 듯)
   #V INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE: "100" # Batch size for empty block sanitizer (re-fetcher).
   #V INDEXER_CATCHUP_BLOCKS_BATCH_SIZE: "10" # Batch size for blocks catchup fetcher. 
   #V INDEXER_CATCHUP_BLOCKS_CONCURRENCY: "10" # Concurrency for blocks catchup fetcher.
@@ -125,27 +126,28 @@ data:
   #V GAS_PRICE_ORACLE_CACHE_PERIOD: "1h" # default: 30s
 
   ### Main page dashboard management
-  GAS_PRICE: "0" # ()
+  GAS_PRICE: "0" # (우리는 free gas network)
   ENABLE_TXS_STATS: "true"
   SHOW_PRICE_CHART: "false"
   SHOW_TXS_CHART: "true"
-  HISTORY_FETCH_INTERVAL: "30m" # default 1h => 무엇에 대한 내용?
+  HISTORY_FETCH_INTERVAL: "10m" # default 1h => 얼마나 자주 업데이트할지?
   #TXS_HISTORIAN_INIT_LAG: "0"
-  #TXS_STATS_DAYS_TO_COMPILE_AT_INIT: "32" # 메인 페이지의 일별 txs 수 기록 차트에 표시하기 위해 일별 txs 수 기록을 가져오는 일수입니다.
+  TXS_STATS_DAYS_TO_COMPILE_AT_INIT: "7" # 메인 페이지의 일별 txs 수 기록 차트에 표시하기 위해 일별 txs 수 기록을 가져오는 일수입니다.
 
   ### Header management
   LOGO: /images/blockscout_logo.svg
-  SHOW_TESTNET_LABEL: "false"
-  TESTNET_LABEL_TEXT: "Testnet"
+  SHOW_TESTNET_LABEL: "true"
+  TESTNET_LABEL_TEXT: "Dev Testnet"
+  #TESTNET_LABEL_TEXT: "Testnet"
   SUPPORTED_CHAINS: '[ {"title": "Dev Chainz", "url": "https://dev-block-explorer.chainz.biz/"}, {"title": "Dev Chainz", "url": "https://dev-test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Chainz", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
-  #V APPS_MENU: "false" # need??
+  #V APPS_MENU: "false" # default false => API 서비스 등 연결할 것이 있다면 사용
   #V APPS: ""
 
   ### Footer management
   LOGO_FOOTER: /images/blockscout_logo.svg
   BLOCKSCOUT_VERSION: "v5.1.2"
   RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/v5.1.2-beta"
-  #RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/${BLOCKSCOUT_VERSION}-beta"
+  #RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/${BLOCKSCOUT_VERSION}-beta" # 환경변수적용 안됨
   #FOOTER_CHAT_LINK: "https://discord.gg/3CtNAqVMRV" # 바닥글의 채팅 메뉴 항목에 연결합니다.
   #V FOOTER_ENABLE_FORUM_LINK: "false"
   #V FOOTER_GITHUB_LINK: "true"
@@ -156,7 +158,7 @@ data:
   CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS: "homestead, tangerineWhistle, spuriousDragon, byzantium, constantinople, petersburg, istanbul"
   #CONTRACT_VERIFICATION_MAX_LIBRARIES: "" # default 10
   CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING: "2040"
-  #CONTRACT_DISABLE_INTERACTION: "" # default false
+  CONTRACT_DISABLE_INTERACTION: "true" # default false
 
   ### Misc UI management
   SHOW_ADDRESS_MARKETCAP_PERCENTAGE: "false" # 수정
@@ -197,10 +199,10 @@ data:
 
   ### Sig-provider => 뭐하는 것인지 모르겠음
   SIG_PROVIDER_ENABLED: "false"
-  #SIG_PROVIDER_SERVICE_URL: ""
-  SIG_PROVIDER_SERVICE_URL: "http://sig-provider.blockscout:8050"
+  SIG_PROVIDER_SERVICE_URL: ""
+  #SIG_PROVIDER_SERVICE_URL: "http://sig-provider.blockscout:8050"
 
-  ### Sourcify : need ?? => Gnosis 기준 => 사용할 경우, Code 버튼 클릭시 에러발생
+  ### Sourcify : need ?? => Gnosis 기준 => 사용할 경우, Code 버튼 클릭시 에러발생 (회사 네트워크라서 그런가?)
   ENABLE_SOURCIFY_INTEGRATION: "false"
   SOURCIFY_REPO_URL: "https://repo.sourcify.dev/contracts/"
   SOURCIFY_SERVER_URL: "https://sourcify.dev/server"
