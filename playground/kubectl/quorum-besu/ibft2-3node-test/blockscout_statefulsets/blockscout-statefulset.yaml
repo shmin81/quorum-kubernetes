@@ -124,21 +124,21 @@ spec:
                 configMapKeyRef:
                   key: COIN_NAME
                   name: common-blockscout-env
-            - name: EMISSION_FORMAT
-              valueFrom:
-                configMapKeyRef:
-                  key: EMISSION_FORMAT
-                  name: common-blockscout-env
-            - name: POOL_SIZE
-              valueFrom:
-                configMapKeyRef:
-                  key: POOL_SIZE
-                  name: common-blockscout-env
-            - name: POOL_SIZE_API
-              valueFrom:
-                configMapKeyRef:
-                  key: POOL_SIZE_API
-                  name: common-blockscout-env
+            # - name: EMISSION_FORMAT
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: EMISSION_FORMAT
+            #       name: common-blockscout-env
+            # - name: POOL_SIZE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: POOL_SIZE
+            #       name: common-blockscout-env
+            # - name: POOL_SIZE_API
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: POOL_SIZE_API
+            #       name: common-blockscout-env
             - name: ECTO_USE_SSL
               valueFrom:
                 configMapKeyRef:
@@ -179,18 +179,19 @@ spec:
                 configMapKeyRef:
                   key: CHECKSUM_FUNCTION
                   name: common-blockscout-env
-            - name: TOKEN_ID_MIGRATION_FIRST_BLOCK
-              value: "0"
-            - name: TOKEN_ID_MIGRATION_CONCURRENCY
-              value: "1"
-            - name: TOKEN_ID_MIGRATION_BATCH_SIZE
-              value: "50"
+            # - name: TOKEN_ID_MIGRATION_FIRST_BLOCK
+            #   value: "0"
+            # - name: TOKEN_ID_MIGRATION_CONCURRENCY
+            #   value: "1"
+            # - name: TOKEN_ID_MIGRATION_BATCH_SIZE
+            #   value: "100"
+
             # Indexer management
-            - name: BLOCK_TRANSFORMER
-              valueFrom:
-                configMapKeyRef:
-                  key: BLOCK_TRANSFORMER
-                  name: common-blockscout-env
+            # - name: BLOCK_TRANSFORMER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: BLOCK_TRANSFORMER
+            #       name: common-blockscout-env
             - name: DISABLE_INDEXER
               valueFrom:
                 configMapKeyRef:
@@ -216,36 +217,39 @@ spec:
                 configMapKeyRef:
                   key: INDEXER_MEMORY_LIMIT
                   name: common-blockscout-env
-            - name: INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE
-              value: "10"
-            - name: INDEXER_CATCHUP_BLOCKS_BATCH_SIZE
-              value: "4"
-            - name: INDEXER_CATCHUP_BLOCKS_CONCURRENCY
-              value: "4"
+            # - name: INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE
+            #   value: "10"
+            # - name: INDEXER_CATCHUP_BLOCKS_BATCH_SIZE
+            #   value: "4"
+            # - name: INDEXER_CATCHUP_BLOCKS_CONCURRENCY
+            #   value: "4"
 
-            - name: INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE
-              value: "5"
-            - name: INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY
-              value: "2"
-            - name: INDEXER_BLOCK_REWARD_BATCH_SIZE
-              value: "5"
-            - name: INDEXER_BLOCK_REWARD_CONCURRENCY
-              value: "2"
-            - name: INDEXER_TOKEN_INSTANCE_BATCH_SIZE
-              value: "1"
-            - name: INDEXER_TOKEN_INSTANCE_CONCURRENCY
-              value: "4"
-            - name: INDEXER_RECEIPTS_BATCH_SIZE
-              value: "50"
-            - name: INDEXER_RECEIPTS_CONCURRENCY
-              value: "4"
-            - name: INDEXER_COIN_BALANCES_BATCH_SIZE
-              value: "50"
-            - name: INDEXER_COIN_BALANCES_CONCURRENCY
-              value: "2"
-            # what?? need??
+            # - name: INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE
+            #   value: "5"
+            # - name: INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY
+            #   value: "2"
+            # - name: INDEXER_BLOCK_REWARD_BATCH_SIZE
+            #   value: "5"
+            # - name: INDEXER_BLOCK_REWARD_CONCURRENCY
+            #   value: "2"
+            # - name: INDEXER_TOKEN_INSTANCE_BATCH_SIZE
+            #   value: "1"
+            # - name: INDEXER_TOKEN_INSTANCE_CONCURRENCY
+            #   value: "4"
+            # - name: INDEXER_RECEIPTS_BATCH_SIZE
+            #   value: "50"
+            # - name: INDEXER_RECEIPTS_CONCURRENCY
+            #   value: "4"
+            # - name: INDEXER_COIN_BALANCES_BATCH_SIZE
+            #   value: "50"
+            # - name: INDEXER_COIN_BALANCES_CONCURRENCY
+            #   value: "2"
+
             - name: INDEXER_TX_ACTIONS_ENABLE
-              value: "false"
+              valueFrom:
+                configMapKeyRef:
+                  key: INDEXER_TX_ACTIONS_ENABLE
+                  name: common-blockscout-env
 
             # Exchange rates management
             - name: DISABLE_EXCHANGE_RATES
@@ -253,37 +257,43 @@ spec:
                 configMapKeyRef:
                   key: DISABLE_EXCHANGE_RATES
                   name: common-blockscout-env
-            - name: DISABLE_TOKEN_EXCHANGE_RATE
-              valueFrom:
-                configMapKeyRef:
-                  key: DISABLE_TOKEN_EXCHANGE_RATE
-                  name: common-blockscout-env
+            # - name: DISABLE_TOKEN_EXCHANGE_RATE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_TOKEN_EXCHANGE_RATE
+            #       name: common-blockscout-env
             # Gas price oracle management
             - name: GAS_PRICE_ORACLE_NUM_OF_BLOCKS
-              value: "2"
+              valueFrom:
+                configMapKeyRef:
+                  key: GAS_PRICE_ORACLE_NUM_OF_BLOCKS
+                  name: common-blockscout-env
             - name: GAS_PRICE_ORACLE_CACHE_PERIOD
-              value: "2h"
+              valueFrom:
+                configMapKeyRef:
+                  key: GAS_PRICE_ORACLE_CACHE_PERIOD
+                  name: common-blockscout-env
             # Main page dashboard management
             - name: GAS_PRICE
               valueFrom:
                 configMapKeyRef:
                   key: GAS_PRICE
                   name: common-blockscout-env
-            - name: ENABLE_TXS_STATS
-              valueFrom:
-                configMapKeyRef:
-                  key: ENABLE_TXS_STATS
-                  name: common-blockscout-env
-            - name: SHOW_PRICE_CHART
-              valueFrom:
-                configMapKeyRef:
-                  key: SHOW_PRICE_CHART
-                  name: common-blockscout-env
-            - name: SHOW_TXS_CHART
-              valueFrom:
-                configMapKeyRef:
-                  key: SHOW_TXS_CHART
-                  name: common-blockscout-env
+            # - name: ENABLE_TXS_STATS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: ENABLE_TXS_STATS
+            #       name: common-blockscout-env
+            # - name: SHOW_PRICE_CHART
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: SHOW_PRICE_CHART
+            #       name: common-blockscout-env
+            # - name: SHOW_TXS_CHART
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: SHOW_TXS_CHART
+            #       name: common-blockscout-env
             - name: HISTORY_FETCH_INTERVAL
               valueFrom:
                 configMapKeyRef:
@@ -316,9 +326,15 @@ spec:
                   key: SUPPORTED_CHAINS
                   name: common-blockscout-env
             - name: APPS_MENU
-              value: "false"
-            # - name: APPS
-            #   value: ""
+              valueFrom:
+                configMapKeyRef:
+                  key: APPS_MENU
+                  name: common-blockscout-env
+            - name: APPS
+              valueFrom:
+                configMapKeyRef:
+                  key: APPS
+                  name: common-blockscout-env
             # Footer management
             - name: LOGO_FOOTER
               valueFrom:
@@ -336,31 +352,36 @@ spec:
                   key: BLOCKSCOUT_VERSION
                   name: common-blockscout-env
             - name: FOOTER_ENABLE_FORUM_LINK
-              value: "false"
+              valueFrom:
+                configMapKeyRef:
+                  key: FOOTER_ENABLE_FORUM_LINK
+                  name: common-blockscout-env
             - name: FOOTER_GITHUB_LINK
-              value: "true"
+              valueFrom:
+                configMapKeyRef:
+                  key: FOOTER_GITHUB_LINK
+                  name: common-blockscout-env
             - name: LINK_TO_OTHER_EXPLORERS
-              value: "false"
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: LINK_TO_OTHER_EXPLORERS
-            #       name: common-blockscout-env
-            # - name: OTHER_EXPLORERS
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: OTHER_EXPLORERS
-            #       name: common-blockscout-env
+              valueFrom:
+                configMapKeyRef:
+                  key: LINK_TO_OTHER_EXPLORERS
+                  name: common-blockscout-env
+            - name: OTHER_EXPLORERS
+              valueFrom:
+                configMapKeyRef:
+                  key: OTHER_EXPLORERS
+                  name: common-blockscout-env
             # Contract management
             - name: CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS
               valueFrom:
                 configMapKeyRef:
                   key: CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS
                   name: common-blockscout-env
-            - name: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
-              valueFrom:
-                configMapKeyRef:
-                  key: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
-                  name: common-blockscout-env
+            # - name: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING
+            #       name: common-blockscout-env
             - name: CONTRACT_DISABLE_INTERACTION
               valueFrom:
                 configMapKeyRef:
@@ -408,10 +429,18 @@ spec:
                   key: ADMIN_PANEL_ENABLED
                   name: common-blockscout-env
             # API rate limit management
+            - name: API_RATE_LIMIT
+              valueFrom:
+                configMapKeyRef:
+                  key: API_RATE_LIMIT
+                  name: common-blockscout-env
             # Specific smart-contracts
             # Account-related ENV variables
             - name: ACCOUNT_ENABLED
-              value: "false"
+              valueFrom:
+                configMapKeyRef:
+                  key: ACCOUNT_ENABLED
+                  name: common-blockscout-env
             # Smart-contract verifier
             - name: ENABLE_RUST_VERIFICATION_SERVICE
               valueFrom:
