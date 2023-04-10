@@ -67,13 +67,19 @@ spec:
             - name: SMART_CONTRACT_VERIFIER__VYPER__FETCHER__LIST__LIST_URL
               value: "https://raw.githubusercontent.com/blockscout/solc-bin/main/vyper.list.json"
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__ENABLED
-              value: "false"
+              valueFrom:
+                configMapKeyRef:
+                  key: ENABLE_SOURCIFY_INTEGRATION
+                  name: common-blockscout-env
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__API_URL
-              value: "https://sourcify.dev/server/"
+              valueFrom:
+                configMapKeyRef:
+                  key: SOURCIFY_SERVER_URL
+                  name: common-blockscout-env
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__VERIFICATION_ATTEMPTS
               value: "3"
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__REQUEST_TIMEOUT
-              value: "20"
+              value: "30"
             - name: SMART_CONTRACT_VERIFIER__METRICS__ENABLED
               value: "false"
             - name: SMART_CONTRACT_VERIFIER__METRICS__ADDR

@@ -354,6 +354,7 @@ spec:
                 configMapKeyRef:
                   key: TXS_STATS_DAYS_TO_COMPILE_AT_INIT
                   name: common-blockscout-env
+            
             # Contract management
             - name: CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS
               valueFrom:

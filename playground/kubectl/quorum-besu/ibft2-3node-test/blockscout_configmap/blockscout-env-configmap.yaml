@@ -161,7 +161,7 @@ data:
   CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS: "homestead, tangerineWhistle, spuriousDragon, byzantium, constantinople, petersburg, istanbul"
   #CONTRACT_VERIFICATION_MAX_LIBRARIES: "" # default 10
   CONTRACT_MAX_STRING_LENGTH_WITHOUT_TRIMMING: "2040"
-  CONTRACT_DISABLE_INTERACTION: "false" # default false
+  CONTRACT_DISABLE_INTERACTION: "true" # default false (if JWT Auth, true only)
 
   ### Misc UI management
   SHOW_ADDRESS_MARKETCAP_PERCENTAGE: "false" # 수정
@@ -198,7 +198,7 @@ data:
   VISUALIZE_SOL2UML_ENABLED: "true"
   VISUALIZE_SOL2UML_SERVICE_URL: "http://visualizer.blockscout:8050"
 
-  ### Sourcify : need ?? => Gnosis 기준
+  ### Sourcify : (use smart-contract-verifier too)
   ENABLE_SOURCIFY_INTEGRATION: "true"
   SOURCIFY_REPO_URL: "https://repo.sourcify.dev/contracts/"
   SOURCIFY_SERVER_URL: "https://sourcify.dev/server"

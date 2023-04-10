@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: dev2-blockscout-env
+  name: prd2-blockscout-env
   labels:
-    app: dev2-blockscout-env
+    app: prd2-blockscout-env
   namespace: blockscout
 data:
   # item # : templete에 추가하지 않았음.(원래 없던 것 추가할지 생각해볼것)

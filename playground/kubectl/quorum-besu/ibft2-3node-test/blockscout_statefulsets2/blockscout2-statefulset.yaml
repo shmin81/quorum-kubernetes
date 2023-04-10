@@ -310,33 +310,33 @@ spec:
                 configMapKeyRef:
                   key: INDEXER_MEMORY_LIMIT
                   name: common-blockscout-env
-            - name: INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE
-              value: "10"
-            - name: INDEXER_CATCHUP_BLOCKS_BATCH_SIZE
-              value: "4"
-            - name: INDEXER_CATCHUP_BLOCKS_CONCURRENCY
-              value: "4"
+            # - name: INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE
+            #   value: "10"
+            # - name: INDEXER_CATCHUP_BLOCKS_BATCH_SIZE
+            #   value: "4"
+            # - name: INDEXER_CATCHUP_BLOCKS_CONCURRENCY
+            #   value: "4"
 
-            - name: INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE
-              value: "5"
-            - name: INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY
-              value: "2"
-            - name: INDEXER_BLOCK_REWARD_BATCH_SIZE
-              value: "5"
-            - name: INDEXER_BLOCK_REWARD_CONCURRENCY
-              value: "2"
-            - name: INDEXER_TOKEN_INSTANCE_BATCH_SIZE
-              value: "1"
-            - name: INDEXER_TOKEN_INSTANCE_CONCURRENCY
-              value: "4"
-            - name: INDEXER_RECEIPTS_BATCH_SIZE
-              value: "50"
-            - name: INDEXER_RECEIPTS_CONCURRENCY
-              value: "4"
-            - name: INDEXER_COIN_BALANCES_BATCH_SIZE
-              value: "50"
-            - name: INDEXER_COIN_BALANCES_CONCURRENCY
-              value: "2"
+            # - name: INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE
+            #   value: "5"
+            # - name: INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY
+            #   value: "2"
+            # - name: INDEXER_BLOCK_REWARD_BATCH_SIZE
+            #   value: "5"
+            # - name: INDEXER_BLOCK_REWARD_CONCURRENCY
+            #   value: "2"
+            # - name: INDEXER_TOKEN_INSTANCE_BATCH_SIZE
+            #   value: "1"
+            # - name: INDEXER_TOKEN_INSTANCE_CONCURRENCY
+            #   value: "4"
+            # - name: INDEXER_RECEIPTS_BATCH_SIZE
+            #   value: "50"
+            # - name: INDEXER_RECEIPTS_CONCURRENCY
+            #   value: "4"
+            # - name: INDEXER_COIN_BALANCES_BATCH_SIZE
+            #   value: "50"
+            # - name: INDEXER_COIN_BALANCES_CONCURRENCY
+            #   value: "2"
 
             # - name: INDEXER_TX_ACTIONS_ENABLE
             #   valueFrom:
@@ -494,33 +494,23 @@ spec:
                 configMapKeyRef:
                   key: VISUALIZE_SOL2UML_SERVICE_URL
                   name: common-blockscout-env
-            # Sig-provider
-            # - name: SIG_PROVIDER_ENABLED
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SIG_PROVIDER_ENABLED
-            #       name: common-blockscout-env
-            # - name: SIG_PROVIDER_SERVICE_URL
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SIG_PROVIDER_SERVICE_URL
-            #       name: common-blockscout-env
+
             # Sourcify
-            # - name: ENABLE_SOURCIFY_INTEGRATION
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: ENABLE_SOURCIFY_INTEGRATION
-            #       name: common-blockscout-env
-            # - name: SOURCIFY_REPO_URL
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SOURCIFY_REPO_URL
-            #       name: common-blockscout-env
-            # - name: SOURCIFY_SERVER_URL
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SOURCIFY_SERVER_URL
-            #       name: common-blockscout-env
+            - name: ENABLE_SOURCIFY_INTEGRATION
+              valueFrom:
+                configMapKeyRef:
+                  key: ENABLE_SOURCIFY_INTEGRATION
+                  name: common-blockscout-env
+            - name: SOURCIFY_REPO_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SOURCIFY_REPO_URL
+                  name: common-blockscout-env
+            - name: SOURCIFY_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SOURCIFY_SERVER_URL
+                  name: common-blockscout-env
           ports:
             - containerPort: 4000
               name: http
