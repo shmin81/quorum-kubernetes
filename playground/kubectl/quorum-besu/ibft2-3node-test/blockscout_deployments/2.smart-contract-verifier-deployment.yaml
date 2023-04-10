@@ -15,6 +15,10 @@ spec:
     metadata:
       labels:
         app: smart-contract-verifier
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "6060"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
         - name: smart-contract-verifier
@@ -63,7 +67,7 @@ spec:
             - name: SMART_CONTRACT_VERIFIER__VYPER__FETCHER__LIST__LIST_URL
               value: "https://raw.githubusercontent.com/blockscout/solc-bin/main/vyper.list.json"
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__ENABLED
-              value: "true"
+              value: "false"
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__API_URL
               value: "https://sourcify.dev/server/"
             - name: SMART_CONTRACT_VERIFIER__SOURCIFY__VERIFICATION_ATTEMPTS

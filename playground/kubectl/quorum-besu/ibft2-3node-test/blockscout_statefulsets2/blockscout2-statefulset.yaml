@@ -2,27 +2,27 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: blockscout
+  name: blockscout2
   labels:
-    app: blockscout
+    app: blockscout2
   namespace: blockscout
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blockscout
-  serviceName: blockscout-1
+      app: blockscout2
+  serviceName: blockscout-2
   template:
     metadata:
       labels:
-        app: blockscout
+        app: blockscout2
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "4000"
         prometheus.io/path: "/metrics"
     spec:
       containers:
-        - name: blockscout
+        - name: blockscout2
           image: blockscout/blockscout:5.1.2
           imagePullPolicy: IfNotPresent
           resources:
@@ -41,6 +41,13 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: TOKEN_ID_MIGRATION_FIRST_BLOCK
+              value: "25500000"
+            - name: FIRST_BLOCK
+              value: "25500000"
+            - name: TRACE_FIRST_BLOCK
+              value: "25500000"
+              
             - name: SECRET_KEY_BASE
               valueFrom:
                 configMapKeyRef:
@@ -50,87 +57,87 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: DATABASE_URL
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_VARIANT
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_VARIANT
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_HTTP_URL
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_HTTP_URL
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_TRACE_URL
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_TRACE_URL
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_WS_URL
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_WS_URL
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_TRANSPORT
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_TRANSPORT
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_HTTP_INSECURE
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_HTTP_INSECURE
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: ETHEREUM_JSONRPC_HTTP_TIMEOUT
               valueFrom:
                 configMapKeyRef:
                   key: ETHEREUM_JSONRPC_HTTP_TIMEOUT
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: NETWORK
               valueFrom:
                 configMapKeyRef:
                   key: NETWORK
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: SUBNETWORK
               valueFrom:
                 configMapKeyRef:
                   key: SUBNETWORK
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: NETWORK_PATH
               valueFrom:
                 configMapKeyRef:
                   key: NETWORK_PATH
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: BLOCKSCOUT_HOST
               valueFrom:
                 configMapKeyRef:
                   key: BLOCKSCOUT_HOST
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: BLOCKSCOUT_PROTOCOL
               valueFrom:
                 configMapKeyRef:
                   key: BLOCKSCOUT_PROTOCOL
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: CHECK_ORIGIN
               valueFrom:
                 configMapKeyRef:
                   key: CHECK_ORIGIN
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: PORT
               valueFrom:
                 configMapKeyRef:
                   key: PORT
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: COIN
               valueFrom:
                 configMapKeyRef:
                   key: COIN
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: COIN_NAME
               valueFrom:
                 configMapKeyRef:
                   key: COIN_NAME
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: CHAIN_ID
               valueFrom:
                 configMapKeyRef:
@@ -172,16 +179,16 @@ spec:
             #     configMapKeyRef:
             #       key: DISABLE_WEBAPP
             #       name: common-blockscout-env
-            - name: DISABLE_READ_API
-              valueFrom:
-                configMapKeyRef:
-                  key: DISABLE_READ_API
-                  name: common-blockscout-env
-            - name: DISABLE_WRITE_API
-              valueFrom:
-                configMapKeyRef:
-                  key: DISABLE_WRITE_API
-                  name: common-blockscout-env
+            # - name: DISABLE_READ_API
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_READ_API
+            #       name: common-blockscout-env
+            # - name: DISABLE_WRITE_API
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_WRITE_API
+            #       name: common-blockscout-env
             - name: WOBSERVER_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -199,78 +206,78 @@ spec:
             #       name: common-blockscout-env
             # - name: TOKEN_ID_MIGRATION_FIRST_BLOCK
             #   value: "0"
-            # - name: TOKEN_ID_MIGRATION_CONCURRENCY
-            #   value: "1"
-            # - name: TOKEN_ID_MIGRATION_BATCH_SIZE
-            #   value: "100"
+            - name: TOKEN_ID_MIGRATION_CONCURRENCY
+              value: "1"
+            - name: TOKEN_ID_MIGRATION_BATCH_SIZE
+              value: "100"
 
             # Header management
             - name: LOGO
               valueFrom:
                 configMapKeyRef:
                   key: LOGO
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: SHOW_TESTNET_LABEL
               valueFrom:
                 configMapKeyRef:
                   key: SHOW_TESTNET_LABEL
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: TESTNET_LABEL_TEXT
               valueFrom:
                 configMapKeyRef:
                   key: TESTNET_LABEL_TEXT
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: SUPPORTED_CHAINS
               valueFrom:
                 configMapKeyRef:
                   key: SUPPORTED_CHAINS
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: APPS_MENU
               valueFrom:
                 configMapKeyRef:
                   key: APPS_MENU
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: APPS
               valueFrom:
                 configMapKeyRef:
                   key: APPS
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             # Footer management
             - name: LOGO_FOOTER
               valueFrom:
                 configMapKeyRef:
                   key: LOGO_FOOTER
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: RELEASE_LINK
               valueFrom:
                 configMapKeyRef:
                   key: RELEASE_LINK
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: BLOCKSCOUT_VERSION
               valueFrom:
                 configMapKeyRef:
                   key: BLOCKSCOUT_VERSION
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: FOOTER_ENABLE_FORUM_LINK
               valueFrom:
                 configMapKeyRef:
                   key: FOOTER_ENABLE_FORUM_LINK
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: FOOTER_GITHUB_LINK
               valueFrom:
                 configMapKeyRef:
                   key: FOOTER_GITHUB_LINK
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: LINK_TO_OTHER_EXPLORERS
               valueFrom:
                 configMapKeyRef:
                   key: LINK_TO_OTHER_EXPLORERS
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             - name: OTHER_EXPLORERS
               valueFrom:
                 configMapKeyRef:
                   key: OTHER_EXPLORERS
-                  name: dev1-blockscout-env
+                  name: dev2-blockscout-env
             
             # Indexer management
             - name: BLOCK_TRANSFORMER
@@ -303,6 +310,39 @@ spec:
                 configMapKeyRef:
                   key: INDEXER_MEMORY_LIMIT
                   name: common-blockscout-env
+            - name: INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE
+              value: "10"
+            - name: INDEXER_CATCHUP_BLOCKS_BATCH_SIZE
+              value: "4"
+            - name: INDEXER_CATCHUP_BLOCKS_CONCURRENCY
+              value: "4"
+
+            - name: INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE
+              value: "5"
+            - name: INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY
+              value: "2"
+            - name: INDEXER_BLOCK_REWARD_BATCH_SIZE
+              value: "5"
+            - name: INDEXER_BLOCK_REWARD_CONCURRENCY
+              value: "2"
+            - name: INDEXER_TOKEN_INSTANCE_BATCH_SIZE
+              value: "1"
+            - name: INDEXER_TOKEN_INSTANCE_CONCURRENCY
+              value: "4"
+            - name: INDEXER_RECEIPTS_BATCH_SIZE
+              value: "50"
+            - name: INDEXER_RECEIPTS_CONCURRENCY
+              value: "4"
+            - name: INDEXER_COIN_BALANCES_BATCH_SIZE
+              value: "50"
+            - name: INDEXER_COIN_BALANCES_CONCURRENCY
+              value: "2"
+
+            # - name: INDEXER_TX_ACTIONS_ENABLE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: INDEXER_TX_ACTIONS_ENABLE
+            #       name: common-blockscout-env
 
             # Exchange rates management
             - name: DISABLE_EXCHANGE_RATES
@@ -310,7 +350,11 @@ spec:
                 configMapKeyRef:
                   key: DISABLE_EXCHANGE_RATES
                   name: common-blockscout-env
-
+            # - name: DISABLE_TOKEN_EXCHANGE_RATE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_TOKEN_EXCHANGE_RATE
+            #       name: common-blockscout-env
             # Gas price oracle management
             - name: GAS_PRICE_ORACLE_NUM_OF_BLOCKS
               valueFrom:
@@ -322,7 +366,6 @@ spec:
                 configMapKeyRef:
                   key: GAS_PRICE_ORACLE_CACHE_PERIOD
                   name: common-blockscout-env
-
             # Main page dashboard management
             - name: GAS_PRICE
               valueFrom:
@@ -463,21 +506,21 @@ spec:
             #       key: SIG_PROVIDER_SERVICE_URL
             #       name: common-blockscout-env
             # Sourcify
-            - name: ENABLE_SOURCIFY_INTEGRATION
-              valueFrom:
-                configMapKeyRef:
-                  key: ENABLE_SOURCIFY_INTEGRATION
-                  name: common-blockscout-env
-            - name: SOURCIFY_REPO_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: SOURCIFY_REPO_URL
-                  name: common-blockscout-env
-            - name: SOURCIFY_SERVER_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: SOURCIFY_SERVER_URL
-                  name: common-blockscout-env
+            # - name: ENABLE_SOURCIFY_INTEGRATION
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: ENABLE_SOURCIFY_INTEGRATION
+            #       name: common-blockscout-env
+            # - name: SOURCIFY_REPO_URL
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: SOURCIFY_REPO_URL
+            #       name: common-blockscout-env
+            # - name: SOURCIFY_SERVER_URL
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: SOURCIFY_SERVER_URL
+            #       name: common-blockscout-env
           ports:
             - containerPort: 4000
               name: http

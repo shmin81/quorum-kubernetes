@@ -1,0 +1,56 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev2-blockscout-env
+  labels:
+    app: dev2-blockscout-env
+  namespace: blockscout
+data:
+  # item # : templete에 추가하지 않았음.(원래 없던 것 추가할지 생각해볼것)
+  ## item ## : templete에 추가하지 않았음.(원래 있었지만 뺄것?)
+  #V item #V : templete에 추가하지 않았음.(변수가 아니라 값으로 추가할것)
+  ### General
+  SECRET_KEY_BASE: VTIB3uHDNbvrY0+60ZWgUoUBKDn9ppLR8MI4CpRz4/qLyEFs54ktJfaNT6Z221
+  DATABASE_URL: postgresql://blockdevtest:devtest12@db-postgre.blockscout:5432/chainzdevtestnet?ssl=false
+  
+  ETHEREUM_JSONRPC_VARIANT: besu
+  ETHEREUM_JSONRPC_HTTP_URL: https://testnet.chainz.biz/
+  ETHEREUM_JSONRPC_TRACE_URL: https://testnet.chainz.biz/
+  ETHEREUM_JSONRPC_WS_URL: wss://testnet.chainz.biz/ws/
+  ETHEREUM_JSONRPC_TRANSPORT: http # http or ipc
+  ETHEREUM_JSONRPC_HTTP_INSECURE: "true" # false??
+  ETHEREUM_JSONRPC_HTTP_TIMEOUT: "60"
+  NETWORK: Ethereum
+  SUBNETWORK: Chainz Testnet
+  ## IPC_PATH: "" 
+  NETWORK_PATH: / 
+  BLOCKSCOUT_HOST: "localhost:31401" # default localhost (ex: chainz-blockscout.com)
+  BLOCKSCOUT_PROTOCOL: "http" # in prod env https is used, in dev env http is used
+  CHECK_ORIGIN: "false"
+  PORT: "4000"
+  COIN: ETH # 이 항목의 코인은 CoinGecko API를 통해 확인되어 그래프 및 UI의 다른 영역에서 USD 가격을 얻습니다.
+  #COIN_NAME: CHZ # 코인의 표시되는 이름
+  COIN_NAME: coins # 코인의 표시되는 이름
+  CHAIN_ID: "2021" # default empty (for metaMask and sourcify)
+  JSON_RPC: "" # default empty (for metaMask)
+
+  ### Header management
+  LOGO: /images/blockscout_logo.svg
+  SHOW_TESTNET_LABEL: "true"
+  TESTNET_LABEL_TEXT: "Chainz Testnet"
+  #TESTNET_LABEL_TEXT: "Testnet"
+  SUPPORTED_CHAINS: '[ {"title": "Chainz", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
+  APPS_MENU: "false" # default false => API 서비스 등 연결할 것이 있다면 사용
+  APPS: ""
+
+  ### Footer management
+  LOGO_FOOTER: /images/blockscout_logo.svg
+  BLOCKSCOUT_VERSION: "v5.1.2"
+  RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/v5.1.2-beta"
+  #RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/${BLOCKSCOUT_VERSION}-beta" # 환경변수적용 안됨
+  #FOOTER_CHAT_LINK: "https://discord.gg/3CtNAqVMRV" # 바닥글의 채팅 메뉴 항목에 연결합니다.
+  FOOTER_ENABLE_FORUM_LINK: "false"
+  FOOTER_GITHUB_LINK: "https://github.com/shmin81/blockscout"  # 실제 github 주소를 입력 하는 듯 (empty일 경우, 공식 링크로 정의됨)
+  LINK_TO_OTHER_EXPLORERS: "false"  # if true, use OTHER_EXPLORERS.
+  OTHER_EXPLORERS: '{}'

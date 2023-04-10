@@ -21,7 +21,7 @@ spec:
           image: postgres:14
           imagePullPolicy: IfNotPresent
           # 공유 버퍼의 크기는 기본 32M 이지만, 서버 메모리 기준으로 1/4 ~ 1/2 정도로 할당
-          args: ["-c", "shared_buffers=256MB", "-c", "max_connections=200"]
+          args: ["-c", "shared_buffers=256MB", "-c", "max_connections=500"]
           resources:
             requests:
               cpu: 1024m
@@ -38,14 +38,16 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: POSTGRES_HOST_AUTH_METHOD
-              value: "trust"
+            # - name: PGDATA # 데이터베이스 파일을 다른 위치에 저장되도록 함??
+            #   value: "/var/lib/postgresql/data/pgdata"
+            - name: POSTGRES_DB # 생성할 데이터베이스 (정의하지 않는다면 POSTGRES_USER로 생성)
+              value: blockscout
+            # - name: POSTGRES_HOST_AUTH_METHOD # 보안상 사용하지 말것
+            #   value: "trust"
             - name: POSTGRES_PASSWORD
               value: "postgre"
             - name: POSTGRES_USER
               value: "postgre"
-            - name: POSTGRES_DB
-              value: blockscout
           volumeMounts:
             - name: db-data
               mountPath: /var/lib/postgresql/data
