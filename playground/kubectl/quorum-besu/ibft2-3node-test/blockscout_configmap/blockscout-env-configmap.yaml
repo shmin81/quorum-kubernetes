@@ -55,13 +55,13 @@ data:
   # JSON_RPC: "" 
 
   ### (common env) General
-  EMISSION_FORMAT: DEFAULT
+  ## EMISSION_FORMAT: DEFAULT
   #CHAIN_SPEC_PATH: "" # x
   #SUPPLY_MODULE: ""
-  POOL_SIZE: "30"  # 
-  POOL_SIZE_API: "30" # 
+  ## POOL_SIZE: "30"  # 
+  ## POOL_SIZE_API: "30" # 
   ECTO_USE_SSL: "false"
-  HEART_BEAT_TIMEOUT: "60"
+  ## HEART_BEAT_TIMEOUT: "60"
   #HEART_COMMAND: ""
   #ELIXIR_VERSION: ""
   #GRAPHIQL_TRANSACTION: ""
@@ -71,8 +71,8 @@ data:
   #WEBAPP_URL: "" # what mean?
   #API_URL: ""    # what mean?
   WOBSERVER_ENABLED: "false" # metrics : need enable ?
-  CHECKSUM_ADDRESS_HASHES: "true"
-  CHECKSUM_FUNCTION: eth
+  ## CHECKSUM_ADDRESS_HASHES: "true"
+  ## CHECKSUM_FUNCTION: eth
   #RESTRICTED_LIST
   #RESTRICTED_LIST_KEY
   #HEALTHY_BLOCKS_PERIOD: "5m"

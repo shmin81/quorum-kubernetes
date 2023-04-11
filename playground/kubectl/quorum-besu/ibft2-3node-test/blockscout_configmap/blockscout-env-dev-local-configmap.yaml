@@ -48,9 +48,8 @@ data:
   LOGO_FOOTER: /images/blockscout_logo.svg
   BLOCKSCOUT_VERSION: "v5.1.2"
   RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/v5.1.2-beta"
-  #RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/${BLOCKSCOUT_VERSION}-beta" # 환경변수적용 안됨
   #FOOTER_CHAT_LINK: "https://discord.gg/3CtNAqVMRV" # 바닥글의 채팅 메뉴 항목에 연결합니다.
   FOOTER_ENABLE_FORUM_LINK: "false"
   FOOTER_GITHUB_LINK: "https://github.com/shmin81/blockscout"  # 실제 github 주소를 입력 하는 듯 (empty일 경우, 공식 링크로 정의됨)
-  LINK_TO_OTHER_EXPLORERS: "true"  # if true, use OTHER_EXPLORERS.
-  OTHER_EXPLORERS: '[ {"title": "Dev Chainz Mainnet", "url": "https://dev-block-explorer.chainz.biz/"}, {"title": "Dev Chainz Testnet", "url": "https://dev-test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Chainz Mainnet", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz Testnet", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Public Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
+  LINK_TO_OTHER_EXPLORERS: "false"  # if true, use OTHER_EXPLORERS.
+  OTHER_EXPLORERS: '{}'
