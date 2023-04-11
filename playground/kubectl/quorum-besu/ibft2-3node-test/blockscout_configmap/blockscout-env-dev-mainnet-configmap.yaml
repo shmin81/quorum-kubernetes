@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: dev-test-blockscout-env
+  name: dev-main-blockscout-env
   labels:
-    app: dev-test-blockscout-env
+    app: dev-main-blockscout-env
   namespace: blockscout
 data:
   # item # : templete에 추가하지 않았음.(원래 없던 것 추가할지 생각해볼것)
@@ -12,20 +12,20 @@ data:
   #V item #V : templete에 추가하지 않았음.(변수가 아니라 값으로 추가할것)
   ### General
   SECRET_KEY_BASE: VTIB3uHDNbvrY0+60ZWgUoUBKDn9ppLR8MI4CpRz4/qLyEFs54ktJfaNT6Z221
-  DATABASE_URL: postgresql://blockdevtest:devtest12@db-postgre.blockscout:5432/chainzdevtestnet?ssl=false
+  DATABASE_URL: postgresql://blockdevtest:devtest12@db-postgre.blockscout:5432/chainzdevmainnet?ssl=false
 
   ETHEREUM_JSONRPC_VARIANT: besu
-  ETHEREUM_JSONRPC_HTTP_URL: https://dev-testnet.chainz.biz/
-  ETHEREUM_JSONRPC_TRACE_URL: https://dev-testnet.chainz.biz/
-  ETHEREUM_JSONRPC_WS_URL: wss://dev-testnet.chainz.biz/ws/
+  ETHEREUM_JSONRPC_HTTP_URL: https://dev-mainnet.chainz.biz/
+  ETHEREUM_JSONRPC_TRACE_URL: https://dev-mainnet.chainz.biz/
+  ETHEREUM_JSONRPC_WS_URL: wss://dev-mainnet.chainz.biz/ws/
   ETHEREUM_JSONRPC_TRANSPORT: http # http or ipc
   ETHEREUM_JSONRPC_HTTP_INSECURE: "true" # false??
   ETHEREUM_JSONRPC_HTTP_TIMEOUT: "60"
   NETWORK: Private Ethereum
-  SUBNETWORK: Chainz Dev Testnet
+  SUBNETWORK: Chainz Dev Mainnet
   ## IPC_PATH: "" 
   NETWORK_PATH: / 
-  BLOCKSCOUT_HOST: "localhost:31401" # default localhost (ex: chainz-blockscout.com)
+  BLOCKSCOUT_HOST: "localhost:31402" # default localhost (ex: chainz-blockscout.com)
   BLOCKSCOUT_PROTOCOL: "http" # in prod env https is used, in dev env http is used
   CHECK_ORIGIN: "false"
   PORT: "4000"
@@ -38,7 +38,7 @@ data:
   ### Header management
   LOGO: /images/blockscout_logo.svg
   SHOW_TESTNET_LABEL: "true"
-  TESTNET_LABEL_TEXT: "Chainz Dev Testnet"
+  TESTNET_LABEL_TEXT: "Chainz Dev Mainnet"
   #TESTNET_LABEL_TEXT: "Testnet"
   SUPPORTED_CHAINS: '[ {"title": "Dev Chainz", "url": "https://dev-block-explorer.chainz.biz/"}, {"title": "Dev Chainz", "url": "https://dev-test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Chainz", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
   APPS_MENU: "false" # default false => API 서비스 등 연결할 것이 있다면 사용

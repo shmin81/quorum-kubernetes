@@ -88,13 +88,13 @@ data:
   ### Indexer management
   BLOCK_TRANSFORMER: base
   DISABLE_INDEXER: "false"
-  INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "false" # not need?
+  INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "true" # not need?
   INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER: "false"
   INDEXER_DISABLE_BLOCK_REWARD_FETCHER: "true" # not need?
   #INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER: "false"
   #INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER: "false" # not need?
-  #INDEXER_MEMORY_LIMIT: "1gb" # need higher
-  INDEXER_MEMORY_LIMIT: "512mb" # need higher (mb, gb 만 가능한 듯)
+  INDEXER_MEMORY_LIMIT: "1gb" # need higher
+  #INDEXER_MEMORY_LIMIT: "512mb" # need higher (mb, gb 만 가능한 듯)
   #V INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE: "100" # Batch size for empty block sanitizer (re-fetcher).
   #V INDEXER_CATCHUP_BLOCKS_BATCH_SIZE: "10" # Batch size for blocks catchup fetcher. 
   #V INDEXER_CATCHUP_BLOCKS_CONCURRENCY: "10" # Concurrency for blocks catchup fetcher.
@@ -155,7 +155,7 @@ data:
   SHOW_TXS_CHART: "true"
   HISTORY_FETCH_INTERVAL: "10m" # default 1h => 얼마나 자주 업데이트할지?
   #TXS_HISTORIAN_INIT_LAG: "0"
-  TXS_STATS_DAYS_TO_COMPILE_AT_INIT: "7" # 메인 페이지의 일별 txs 수 기록 차트에 표시하기 위해 일별 txs 수 기록을 가져오는 일수입니다.
+  TXS_STATS_DAYS_TO_COMPILE_AT_INIT: "30" # 메인 페이지의 일별 txs 수 기록 차트에 표시하기 위해 일별 txs 수 기록을 가져오는 일수입니다.
 
   ### Contract management
   CONTRACT_VERIFICATION_ALLOWED_EVM_VERSIONS: "homestead, tangerineWhistle, spuriousDragon, byzantium, constantinople, petersburg, istanbul"

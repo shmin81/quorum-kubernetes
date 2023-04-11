@@ -1,6 +1,7 @@
 // postgre sample (이름에는 소문자만 사용할것 -> '#$'을 사용했더니 blockscout에서 접속 에러발생했음)
 CREATE USER blockdevtest PASSWORD 'devtest12' SUPERUSER;
-CREATE DATABASE chainzdevtestnet OWNER blockdevtest;  
+CREATE DATABASE chainzdevtestnet OWNER blockdevtest;
+CREATE DATABASE chainzdevmainnet OWNER blockdevtest;  
 
 
 // 현재 사용자 정보를 확인할 때는 아래와 같이 pg_shadow나 pg_user를 사용
