@@ -12,10 +12,10 @@ data:
         "chainId": 2029,
         "istanbulblock": 0,
         "ibft2": {
-          "blockperiodseconds": 10,
-          "emptyblockperiodseconds": 20,
+          "blockperiodseconds": 5,
+          "emptyblockperiodseconds": 15,
           "epochlength": 30000,
-          "requesttimeoutseconds": 35
+          "requesttimeoutseconds": 20
         }
       },
       "nonce": "0x0",
