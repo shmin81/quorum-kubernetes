@@ -57,7 +57,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: SECRET_KEY_BASE
-                  name: dev1-blockscout-env
+                  name: dev-test-blockscout-env
             - name: DATABASE_URL
               valueFrom:
                 configMapKeyRef:
@@ -147,12 +147,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: CHAIN_ID
-                  name: dev1-blockscout-env
+                  name: dev-test-blockscout-env
             - name: JSON_RPC
               valueFrom:
                 configMapKeyRef:
                   key: JSON_RPC
-                  name: dev1-blockscout-env
+                  name: devdev-test-blockscout-env
             # 
             # - name: EMISSION_FORMAT
             #   valueFrom:
@@ -252,23 +252,23 @@ spec:
                 configMapKeyRef:
                   key: FOOTER_GITHUB_LINK
                   name: dev-test-blockscout-env
-            - name: LINK_TO_OTHER_EXPLORERS
-              valueFrom:
-                configMapKeyRef:
-                  key: LINK_TO_OTHER_EXPLORERS
-                  name: dev-test-blockscout-env
-            - name: OTHER_EXPLORERS
-              valueFrom:
-                configMapKeyRef:
-                  key: OTHER_EXPLORERS
-                  name: dev-test-blockscout-env
+            # - name: LINK_TO_OTHER_EXPLORERS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: LINK_TO_OTHER_EXPLORERS
+            #       name: dev-test-blockscout-env
+            # - name: OTHER_EXPLORERS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: OTHER_EXPLORERS
+            #       name: dev-test-blockscout-env
             
             # Indexer management
-            - name: BLOCK_TRANSFORMER
-              valueFrom:
-                configMapKeyRef:
-                  key: BLOCK_TRANSFORMER
-                  name: common-blockscout-env
+            # - name: BLOCK_TRANSFORMER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: BLOCK_TRANSFORMER
+            #       name: common-blockscout-env
             - name: DISABLE_INDEXER
               valueFrom:
                 configMapKeyRef:
@@ -347,21 +347,21 @@ spec:
                 configMapKeyRef:
                   key: GAS_PRICE
                   name: common-blockscout-env
-            # - name: ENABLE_TXS_STATS
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: ENABLE_TXS_STATS
-            #       name: common-blockscout-env
-            # - name: SHOW_PRICE_CHART
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SHOW_PRICE_CHART
-            #       name: common-blockscout-env
-            # - name: SHOW_TXS_CHART
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SHOW_TXS_CHART
-            #       name: common-blockscout-env
+            - name: ENABLE_TXS_STATS
+              valueFrom:
+                configMapKeyRef:
+                  key: ENABLE_TXS_STATS
+                  name: common-blockscout-env
+            - name: SHOW_PRICE_CHART
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_PRICE_CHART
+                  name: common-blockscout-env
+            - name: SHOW_TXS_CHART
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_TXS_CHART
+                  name: common-blockscout-env
             - name: HISTORY_FETCH_INTERVAL
               valueFrom:
                 configMapKeyRef:

@@ -256,23 +256,23 @@ spec:
                 configMapKeyRef:
                   key: FOOTER_GITHUB_LINK
                   name: dev1-blockscout-env
-            - name: LINK_TO_OTHER_EXPLORERS
-              valueFrom:
-                configMapKeyRef:
-                  key: LINK_TO_OTHER_EXPLORERS
-                  name: dev1-blockscout-env
-            - name: OTHER_EXPLORERS
-              valueFrom:
-                configMapKeyRef:
-                  key: OTHER_EXPLORERS
-                  name: dev1-blockscout-env
+            # - name: LINK_TO_OTHER_EXPLORERS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: LINK_TO_OTHER_EXPLORERS
+            #       name: dev1-blockscout-env
+            # - name: OTHER_EXPLORERS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: OTHER_EXPLORERS
+            #       name: dev1-blockscout-env
             
             # Indexer management
-            - name: BLOCK_TRANSFORMER
-              valueFrom:
-                configMapKeyRef:
-                  key: BLOCK_TRANSFORMER
-                  name: common-blockscout-env
+            # - name: BLOCK_TRANSFORMER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: BLOCK_TRANSFORMER
+            #       name: common-blockscout-env
             - name: DISABLE_INDEXER
               valueFrom:
                 configMapKeyRef:
@@ -324,21 +324,21 @@ spec:
                 configMapKeyRef:
                   key: GAS_PRICE
                   name: common-blockscout-env
-            # - name: ENABLE_TXS_STATS
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: ENABLE_TXS_STATS
-            #       name: common-blockscout-env
-            # - name: SHOW_PRICE_CHART
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SHOW_PRICE_CHART
-            #       name: common-blockscout-env
-            # - name: SHOW_TXS_CHART
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       key: SHOW_TXS_CHART
-            #       name: common-blockscout-env
+            - name: ENABLE_TXS_STATS
+              valueFrom:
+                configMapKeyRef:
+                  key: ENABLE_TXS_STATS
+                  name: common-blockscout-env
+            - name: SHOW_PRICE_CHART
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_PRICE_CHART
+                  name: common-blockscout-env
+            - name: SHOW_TXS_CHART
+              valueFrom:
+                configMapKeyRef:
+                  key: SHOW_TXS_CHART
+                  name: common-blockscout-env
             - name: HISTORY_FETCH_INTERVAL
               valueFrom:
                 configMapKeyRef:
@@ -372,16 +372,16 @@ spec:
                 configMapKeyRef:
                   key: SHOW_ADDRESS_MARKETCAP_PERCENTAGE
                   name: common-blockscout-env
-            - name: SHOW_MAINTENANCE_ALERT
-              valueFrom:
-                configMapKeyRef:
-                  key: SHOW_MAINTENANCE_ALERT
-                  name: common-blockscout-env
-            - name: MAINTENANCE_ALERT_MESSAGE
-              valueFrom:
-                configMapKeyRef:
-                  key: MAINTENANCE_ALERT_MESSAGE
-                  name: common-blockscout-env
+            # - name: SHOW_MAINTENANCE_ALERT
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: SHOW_MAINTENANCE_ALERT
+            #       name: common-blockscout-env
+            # - name: MAINTENANCE_ALERT_MESSAGE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: MAINTENANCE_ALERT_MESSAGE
+            #       name: common-blockscout-env
             - name: HIDE_BLOCK_MINER
               valueFrom:
                 configMapKeyRef:

@@ -66,8 +66,8 @@ data:
   #ELIXIR_VERSION: ""
   #GRAPHIQL_TRANSACTION: ""
   DISABLE_WEBAPP: "false"
-  DISABLE_READ_API: "false"
-  DISABLE_WRITE_API: "true" # need read only
+  DISABLE_READ_API: "false" 
+  DISABLE_WRITE_API: "true" # verified contract??
   #WEBAPP_URL: "" # what mean?
   #API_URL: ""    # what mean?
   WOBSERVER_ENABLED: "false" # metrics : need enable ?
@@ -86,15 +86,15 @@ data:
   #DECODE_NOT_A_CONTRACT_CALLS: "false"
 
   ### Indexer management
-  BLOCK_TRANSFORMER: base
+  #BLOCK_TRANSFORMER: base
   DISABLE_INDEXER: "false"
   INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "true" # not need?
   INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER: "false"
   INDEXER_DISABLE_BLOCK_REWARD_FETCHER: "true" # not need?
   #INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER: "false"
   #INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER: "false" # not need?
-  INDEXER_MEMORY_LIMIT: "1gb" # need higher
-  #INDEXER_MEMORY_LIMIT: "512mb" # need higher (mb, gb 만 가능한 듯)
+  #INDEXER_MEMORY_LIMIT: "1gb" # default 1gb (need higher?)
+  INDEXER_MEMORY_LIMIT: "512mb" # need higher (mb, gb 만 가능)
   #V INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE: "100" # Batch size for empty block sanitizer (re-fetcher).
   #V INDEXER_CATCHUP_BLOCKS_BATCH_SIZE: "10" # Batch size for blocks catchup fetcher. 
   #V INDEXER_CATCHUP_BLOCKS_CONCURRENCY: "10" # Concurrency for blocks catchup fetcher.
@@ -168,11 +168,11 @@ data:
   SHOW_MAINTENANCE_ALERT: "false"
   MAINTENANCE_ALERT_MESSAGE: ""  # 익스플로러 상단 공지사항의 메시지 텍스트입니다.
   HIDE_BLOCK_MINER: "false"  # 값이 'true'인 경우 블록 페이지 및 타일에서 광부/검증기/시퀀서를 숨깁니다.
-  DISPLAY_TOKEN_ICONS: "false" # true인 경우 TrustWallet 자산 저장소의 토큰 아이콘을 표시합니다.
+  DISPLAY_TOKEN_ICONS: "false" # true인 경우 TrustWallet 자산 저장소의 토큰 아이콘을 표시.
   UNCLES_IN_AVERAGE_BLOCK_TIME: "false" # 우리는 엉클 블록이 없음
-  COIN_BALANCE_HISTORY_DAYS: "7" # default 10 : token 창의 하단 메뉴 중 하나에 관련된 것인듯? -> DB 조회 조건
+  COIN_BALANCE_HISTORY_DAYS: "1" # default 10 : token 창의 하단 메뉴 중 하나에 관련된 것인듯? -> DB 조회 조건
   ADMIN_PANEL_ENABLED: "false"  # 
-  DISABLE_ADD_TO_MM_BUTTON: "true" # true인 경우 MetaMask에 체인 추가" 버튼이 나타나지 않습니다.(맞나?)
+  DISABLE_ADD_TO_MM_BUTTON: "true" # true인 경우 MetaMask에 체인 추가" 버튼이 나타나지 않음
   #PERMANENT_DARK_MODE_ENABLED: "false" 
   #PERMANENT_LIGHT_MODE_ENABLED: "false"
 
@@ -190,16 +190,16 @@ data:
   ACCOUNT_ENABLED: "false"
   # ...
   
-  ### Smart-contract verifier => 어떻게 무얼해야되는지 모르겠음
-  ENABLE_RUST_VERIFICATION_SERVICE: "true"
+  ### Smart-contract verifier 
+  ENABLE_RUST_VERIFICATION_SERVICE: "false"
   RUST_VERIFICATION_SERVICE_URL: "http://smart-contract-verifier.blockscout:8050"
 
-  ### Sol2Uml => solidity code가 연결되어야 실행 버튼이 보이는 듯?
-  VISUALIZE_SOL2UML_ENABLED: "true"
+  ### Sol2Uml => code를 verify하여, solidity code가 연결되어야 실행 버튼이 보임
+  VISUALIZE_SOL2UML_ENABLED: "false"
   VISUALIZE_SOL2UML_SERVICE_URL: "http://visualizer.blockscout:8050"
 
-  ### Sourcify : (use smart-contract-verifier too)
-  ENABLE_SOURCIFY_INTEGRATION: "true"
+  ### Sourcify : (with smart-contract-verifier)
+  ENABLE_SOURCIFY_INTEGRATION: "false"
   SOURCIFY_REPO_URL: "https://repo.sourcify.dev/contracts/"
   SOURCIFY_SERVER_URL: "https://sourcify.dev/server"
 
