@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: common-blockscout-xenv
+  name: common-blockscout-x-env
   labels:
     app: common-blockscout-x-env
   namespace: blockscout

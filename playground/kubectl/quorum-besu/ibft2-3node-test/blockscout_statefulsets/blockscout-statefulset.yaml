@@ -24,6 +24,7 @@ spec:
       containers:
         - name: blockscout
           image: blockscout/blockscout:5.1.2
+          #image: chainz/blockscout:5.1.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:

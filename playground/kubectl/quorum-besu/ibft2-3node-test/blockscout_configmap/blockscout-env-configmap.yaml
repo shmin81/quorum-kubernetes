@@ -191,15 +191,15 @@ data:
   # ...
   
   ### Smart-contract verifier 
-  ENABLE_RUST_VERIFICATION_SERVICE: "false"
+  ENABLE_RUST_VERIFICATION_SERVICE: "true"
   RUST_VERIFICATION_SERVICE_URL: "http://smart-contract-verifier.blockscout:8050"
 
   ### Sol2Uml => code를 verify하여, solidity code가 연결되어야 실행 버튼이 보임
-  VISUALIZE_SOL2UML_ENABLED: "false"
+  VISUALIZE_SOL2UML_ENABLED: "true"
   VISUALIZE_SOL2UML_SERVICE_URL: "http://visualizer.blockscout:8050"
 
   ### Sourcify : (with smart-contract-verifier)
-  ENABLE_SOURCIFY_INTEGRATION: "false"
+  ENABLE_SOURCIFY_INTEGRATION: "true"
   SOURCIFY_REPO_URL: "https://repo.sourcify.dev/contracts/"
   SOURCIFY_SERVER_URL: "https://sourcify.dev/server"
 

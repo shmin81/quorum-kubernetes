@@ -15,9 +15,9 @@ data:
   DATABASE_URL: postgresql://blockdevtest:devtest12@db-postgre.blockscout:5432/chainzdevtestnet?ssl=false
 
   ETHEREUM_JSONRPC_VARIANT: besu
-  ETHEREUM_JSONRPC_HTTP_URL: https://dev-testnet.chainz.biz/
-  ETHEREUM_JSONRPC_TRACE_URL: https://dev-testnet.chainz.biz/
-  ETHEREUM_JSONRPC_WS_URL: wss://dev-testnet.chainz.biz/ws/
+  ETHEREUM_JSONRPC_HTTP_URL: https://dev-testnet.chainz.biz/  # http://validator1:8545/
+  ETHEREUM_JSONRPC_TRACE_URL: https://dev-testnet.chainz.biz/ # http://validator1:8545/ -> 부하 분산을 위해 다른 노드(validator2)로?
+  ETHEREUM_JSONRPC_WS_URL: wss://dev-testnet.chainz.biz/ws/   # ws://validator1:8546/   -> 부하 분산을 위해 다른 노드(validator3)로?
   ETHEREUM_JSONRPC_TRANSPORT: http # http or ipc
   ETHEREUM_JSONRPC_HTTP_INSECURE: "true" # false??
   ETHEREUM_JSONRPC_HTTP_TIMEOUT: "60"
@@ -41,16 +41,16 @@ data:
   TESTNET_LABEL_TEXT: "Chainz Dev Testnet"
   #TESTNET_LABEL_TEXT: "Testnet"
   SUPPORTED_CHAINS: '[ {"title": "Dev Chainz", "url": "https://dev-block-explorer.chainz.biz/"}, {"title": "Dev Chainz", "url": "https://dev-test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Chainz", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
-  APPS_MENU: "false" # default false => API 서비스 등 연결할 것이 있다면 사용
-  APPS: ""
+  APPS_MENU: "true" # default false => API 서비스 등 연결할 것이 있다면 사용
+  APPS: '[ {"title": "Chainz API Service", "url": "https://apiservice.chainz.biz/"} ]'
 
   ### Footer management
   LOGO_FOOTER: /images/blockscout_logo.svg
   BLOCKSCOUT_VERSION: "v5.1.2"
-  RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/v5.1.2-beta"
+  RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/v5.1.2-beta" 
   #RELEASE_LINK: "https://github.com/blockscout/blockscout/tree/${BLOCKSCOUT_VERSION}-beta" # 환경변수적용 안됨
   #FOOTER_CHAT_LINK: "https://discord.gg/3CtNAqVMRV" # 바닥글의 채팅 메뉴 항목에 연결합니다.
   FOOTER_ENABLE_FORUM_LINK: "false"
-  FOOTER_GITHUB_LINK: "https://github.com/blockscout/blockscout"  # 실제 github 주소를 입력 하는 듯 (empty일 경우, 공식 링크로 정의됨)
-  LINK_TO_OTHER_EXPLORERS: "false"  # if true, use OTHER_EXPLORERS.
-  OTHER_EXPLORERS: '{}'
+  FOOTER_GITHUB_LINK: "https://github.com/blockscout/blockscout"  # 실제 github 주소를 입력 하는 듯 (GPL이라 코드 수정시, 수정된 코드 공개 필요)
+  # LINK_TO_OTHER_EXPLORERS: "false"  # if true, use OTHER_EXPLORERS.
+  # OTHER_EXPLORERS: '{}' 
