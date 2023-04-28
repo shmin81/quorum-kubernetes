@@ -67,7 +67,7 @@ data:
   #GRAPHIQL_TRANSACTION: ""
   DISABLE_WEBAPP: "false"
   DISABLE_READ_API: "false" 
-  DISABLE_WRITE_API: "true" # verified contract??
+  DISABLE_WRITE_API: "false" # verified contract??
   #WEBAPP_URL: "" # what mean?
   #API_URL: ""    # what mean?
   WOBSERVER_ENABLED: "false" # metrics : need enable ?
@@ -81,7 +81,7 @@ data:
   #API_V2_ENABLED: ""
   #V TOKEN_ID_MIGRATION_FIRST_BLOCK: "0"
   #V TOKEN_ID_MIGRATION_CONCURRENCY: "1"
-  #V TOKEN_ID_MIGRATION_BATCH_SIZE: "500" 
+  #V TOKEN_ID_MIGRATION_BATCH_SIZE: "50"  # default 500
   #SESSION_COOKIE_DOMAIN: ""
   #DECODE_NOT_A_CONTRACT_CALLS: "false"
 
@@ -95,9 +95,9 @@ data:
   #INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER: "false" # not need?
   #INDEXER_MEMORY_LIMIT: "1gb" # default 1gb (need higher?)
   INDEXER_MEMORY_LIMIT: "512mb" # need higher (mb, gb 만 가능)
-  #V INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE: "100" # Batch size for empty block sanitizer (re-fetcher).
-  #V INDEXER_CATCHUP_BLOCKS_BATCH_SIZE: "10" # Batch size for blocks catchup fetcher. 
-  #V INDEXER_CATCHUP_BLOCKS_CONCURRENCY: "10" # Concurrency for blocks catchup fetcher.
+  #V INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE: "20"  # default 100  Batch size for empty block sanitizer (re-fetcher).
+  #V INDEXER_CATCHUP_BLOCKS_BATCH_SIZE: "10"           # default 10  Batch size for blocks catchup fetcher. 
+  #V INDEXER_CATCHUP_BLOCKS_CONCURRENCY: "2"           # default 10  Concurrency for blocks catchup fetcher.
   #INDEXER_DISABLE_EMPTY_BLOCKS_SANITIZER: "false"
   #
   #DISABLE_REALTIME_INDEXER: "false" 
@@ -112,16 +112,16 @@ data:
   #ETHEREUM_JSONRPC_PENDING_TRANSACTIONS_TYPE: "default"  # how to besu??
   #
   #DISABLE_TOKEN_INSTANCE_FETCHER: "false"
-  #V INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE: "10"
-  #V INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY: "4"
-  #V INDEXER_BLOCK_REWARD_BATCH_SIZE: "10"
-  #V INDEXER_BLOCK_REWARD_CONCURRENCY: "4"
-  #V INDEXER_TOKEN_INSTANCE_BATCH_SIZE: "1"
-  #V INDEXER_TOKEN_INSTANCE_CONCURRENCY: "10"
-  #V INDEXER_RECEIPTS_BATCH_SIZE: "250"
-  #V INDEXER_RECEIPTS_CONCURRENCY: "10"
-  #V INDEXER_COIN_BALANCES_BATCH_SIZE: "500"
-  #V INDEXER_COIN_BALANCES_CONCURRENCY: "4"
+  #V INDEXER_INTERNAL_TRANSACTIONS_BATCH_SIZE: "5"  # default 10
+  #V INDEXER_INTERNAL_TRANSACTIONS_CONCURRENCY: "1" # default 4
+  #V INDEXER_BLOCK_REWARD_BATCH_SIZE: "5"     # default 10
+  #V INDEXER_BLOCK_REWARD_CONCURRENCY: "1"    # default 4
+  #V INDEXER_TOKEN_INSTANCE_BATCH_SIZE: "1"   # default 1
+  #V INDEXER_TOKEN_INSTANCE_CONCURRENCY: "10" # default 10
+  #V INDEXER_RECEIPTS_BATCH_SIZE: "25"        # default 250
+  #V INDEXER_RECEIPTS_CONCURRENCY: "2"        # default 10
+  #V INDEXER_COIN_BALANCES_BATCH_SIZE: "50"  # default 500
+  #V INDEXER_COIN_BALANCES_CONCURRENCY: "2"   # default 4
   #
   #INDEXER_TX_ACTIONS_ENABLE: "false" # 무슨 기능일까??
   #INDEXER_TX_ACTIONS_MAX_TOKEN_CACHE_SIZE: "100000"
@@ -170,9 +170,9 @@ data:
   HIDE_BLOCK_MINER: "false"  # 값이 'true'인 경우 블록 페이지 및 타일에서 광부/검증기/시퀀서를 숨깁니다.
   DISPLAY_TOKEN_ICONS: "false" # true인 경우 TrustWallet 자산 저장소의 토큰 아이콘을 표시.
   UNCLES_IN_AVERAGE_BLOCK_TIME: "false" # 우리는 엉클 블록이 없음
-  COIN_BALANCE_HISTORY_DAYS: "1" # default 10 : token 창의 하단 메뉴 중 하나에 관련된 것인듯? -> DB 조회 조건
+  COIN_BALANCE_HISTORY_DAYS: "7" # default 10 : token 창의 하단 메뉴 중 하나에 관련된 것인듯? -> DB 조회 조건
   ADMIN_PANEL_ENABLED: "false"  # 
-  DISABLE_ADD_TO_MM_BUTTON: "true" # true인 경우 MetaMask에 체인 추가" 버튼이 나타나지 않음
+  DISABLE_ADD_TO_MM_BUTTON: "false" # true인 경우 MetaMask에 체인 추가" 버튼이 나타나지 않음
   #PERMANENT_DARK_MODE_ENABLED: "false" 
   #PERMANENT_LIGHT_MODE_ENABLED: "false"
 
