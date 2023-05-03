@@ -10,6 +10,13 @@ data:
   ## item ## : templete에 추가하지 않았음.(원래 있었지만 뺄것?)
   #V item #V : templete에 추가하지 않았음.(변수가 아니라 값으로 추가할것)
 
+  ####################
+  # 변경가능
+  # Meta-Mask : DISABLE_ADD_TO_MM_BUTTON, CONTRACT_DISABLE_INTERACTION, CHAIN_ID, JSON_RPC
+  # Indexer : INDEXER_MEMORY_LIMIT, ...?? 
+  # Metrics 활성화 여부 : WOBSERVER_ENABLED
+  ####################
+
   # ### (diff env) Header management
   # LOGO: /images/blockscout_logo.svg
   # SHOW_TESTNET_LABEL: "true"
@@ -106,7 +113,7 @@ data:
   #TRACE_FIRST_BLOCK: "0"
   #TRACE_LAST_BLOCK: ""
   #BLOCK_RANGES: ??
-  #FETCH_REWARDS_WAY: "trace_block"
+  #FETCH_REWARDS_WAY: "manual" # default "trace_block" 
   #ETHEREUM_JSONRPC_DEBUG_TRACE_TRANSACTION_TIMEOUT: "5s" # geth에서만 사용되는 듯
   #ETHEREUM_JSONRPC_DISABLE_ARCHIVE_BALANCES: "false"
   #ETHEREUM_JSONRPC_PENDING_TRANSACTIONS_TYPE: "default"  # how to besu??
@@ -146,14 +153,14 @@ data:
   #GAS_PRICE_ORACLE_SAFELOW_PERCENTILE: "35"
   #GAS_PRICE_ORACLE_AVERAGE_PERCENTILE: "60"
   #GAS_PRICE_ORACLE_FAST_PERCENTILE: "90"
-  GAS_PRICE_ORACLE_CACHE_PERIOD: "2h" # default: 30s (resource down)
+  GAS_PRICE_ORACLE_CACHE_PERIOD: "12h" # default: 30s (resource down)
 
   ### Main page dashboard management
   GAS_PRICE: "0" # default "" (우리는 free gas network)
   ENABLE_TXS_STATS: "true"
   SHOW_PRICE_CHART: "false"
   SHOW_TXS_CHART: "true"
-  HISTORY_FETCH_INTERVAL: "10m" # default 1h => 얼마나 자주 업데이트할지?
+  HISTORY_FETCH_INTERVAL: "2h" # default 1h => 얼마나 자주 업데이트할지? (10m?)
   #TXS_HISTORIAN_INIT_LAG: "0"
   TXS_STATS_DAYS_TO_COMPILE_AT_INIT: "30" # 메인 페이지의 일별 txs 수 기록 차트에 표시하기 위해 일별 txs 수 기록을 가져오는 일수입니다.
 

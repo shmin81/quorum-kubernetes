@@ -163,21 +163,21 @@ spec:
                 configMapKeyRef:
                   key: ECTO_USE_SSL
                   name: common-blockscout-env
-            - name: DISABLE_WEBAPP
-              valueFrom:
-                configMapKeyRef:
-                  key: DISABLE_WEBAPP
-                  name: common-blockscout-env
-            - name: DISABLE_READ_API
-              valueFrom:
-                configMapKeyRef:
-                  key: DISABLE_READ_API
-                  name: common-blockscout-env
-            - name: DISABLE_WRITE_API
-              valueFrom:
-                configMapKeyRef:
-                  key: DISABLE_WRITE_API
-                  name: common-blockscout-env
+            # - name: DISABLE_WEBAPP
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_WEBAPP
+            #       name: common-blockscout-env
+            # - name: DISABLE_READ_API
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_READ_API
+            #       name: common-blockscout-env
+            # - name: DISABLE_WRITE_API
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: DISABLE_WRITE_API
+            #       name: common-blockscout-env
             - name: WOBSERVER_ENABLED
               valueFrom:
                 configMapKeyRef:
