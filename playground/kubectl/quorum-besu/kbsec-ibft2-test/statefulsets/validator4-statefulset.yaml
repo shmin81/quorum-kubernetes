@@ -91,16 +91,16 @@ spec:
                   key: validator2PubKey
             - name: UPGRADE_CNT
               value: "1"
-            - name: BESU_TX_POOL_TX_INFLOW_CONTROL_ENABLE
+            - name: BESU_TX_POOL_TX_INFLOW_CONTROL_ENABLED
               value: "true"
             - name: BESU_TX_POOL_TX_INFLOW_MAX_SIZE
               value: "15000"
-            - name: BESU_TX_POOL_ENTERPRISE_PEDNING_TX_SORTER_ENABLED
-              value: "true"
+            - name: BESU_TX_POOL_ENTERPRISE_PENDING_TX_SORTER_ENABLED
+              value: "false"
             - name: BESU_TARGET_GAS_LIMIT
               value: "20000000"
             - name: BESU_IDENTITY
-              value: besu1
+              value: besu4
             - name: BESU_DATA_PATH
               value: "/data"
             - name: BESU_LOGGING
@@ -164,12 +164,12 @@ spec:
               value: "false"
             - name: BESU_PERMISSIONS_NODES_CONFIG_FILE_ENABLED
               value: "false"
-            # - name: BESU_PERMISSIONS_NODES_CONFIG_FILE
-            #   value: "/data/permissions_config.toml"
+            - name: BESU_PERMISSIONS_NODES_CONFIG_FILE
+              value: "/data/permissions_config.toml"
             - name: BESU_TX_POOL_RETENTION_HOURS
               value: "1"
             - name: BESU_TX_POOL_RETENTION_MINUTES
-              value: "5"
+              value: "2"
             - name: BESU_REVERT_REASON_ENABLED
               value: "true"
             - name: BESU_TX_POOL_MAX_SIZE

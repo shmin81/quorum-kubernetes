@@ -84,12 +84,12 @@ spec:
                   key: validator2PubKey
             - name: UPGRADE_CNT
               value: "1"
-            - name: BESU_TX_POOL_TX_INFLOW_CONTROL_ENABLE
+            - name: BESU_TX_POOL_TX_INFLOW_CONTROL_ENABLED
               value: "true"
             - name: BESU_TX_POOL_TX_INFLOW_MAX_SIZE
               value: "15000"
-            - name: BESU_TX_POOL_ENTERPRISE_PEDNING_TX_SORTER_ENABLED
-              value: "true"
+            - name: BESU_TX_POOL_ENTERPRISE_PENDING_TX_SORTER_ENABLED
+              value: "false"
             - name: BESU_TARGET_GAS_LIMIT
               value: "20000000"
             - name: BESU_IDENTITY
