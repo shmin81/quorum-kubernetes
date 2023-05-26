@@ -1,0 +1,230 @@
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: validator4-sa
+  namespace: besu
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: validator4-key-read-role
+  namespace: besu
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  resourceNames: [ besu-validator4-key ]
+  verbs: ["get"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: validator4-rb
+  namespace: besu
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: validator4-key-read-role
+subjects:
+- kind: ServiceAccount
+  name: validator4-sa
+  namespace: besu
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: validator4
+  labels:
+    app: validator4
+  namespace: besu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: validator4
+  serviceName: besu-validator4
+  template:
+    metadata:
+      labels:
+        app: validator4
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9545"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: validator4-sa
+      initContainers:
+        - name: init-bootnode
+          image: curlimages/curl:7.79.1
+          command:
+            - "sh"
+            - "-c"
+            - "curl -X GET --connect-timeout 30 --max-time 10 --retry 6 --retry-delay 0 --retry-max-time 300 ${BESU_VALIDATOR1_SERVICE_HOST}:8545/liveness"
+      containers:
+        - name: validator4
+          image: chainz/besu:21.10.9.5-log
+          #image: hyperledger/besu:23.1.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1000Mi
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
+          env:
+            - name: VALIDATOR1_PUBKEY
+              valueFrom:
+                configMapKeyRef:
+                  name: besu-validators-configmap
+                  key: validator1PubKey
+            - name: VALIDATOR2_PUBKEY
+              valueFrom:
+                configMapKeyRef:
+                  name: besu-validators-configmap
+                  key: validator2PubKey
+            - name: UPGRADE_CNT
+              value: "1"
+            - name: BESU_TX_POOL_TX_INFLOW_CONTROL_ENABLE
+              value: "true"
+            - name: BESU_TX_POOL_TX_INFLOW_MAX_SIZE
+              value: "15000"
+            - name: BESU_TX_POOL_ENTERPRISE_PEDNING_TX_SORTER_ENABLED
+              value: "true"
+            - name: BESU_TARGET_GAS_LIMIT
+              value: "20000000"
+            - name: BESU_IDENTITY
+              value: besu1
+            - name: BESU_DATA_PATH
+              value: "/data"
+            - name: BESU_LOGGING
+              value: "INFO"
+            - name: BESU_NODE_PRIVATE_KEY_FILE
+              value: "/secrets/nodekey"
+            - name: BESU_GENESIS_FILE
+              value: "/etc/genesis/genesis.json"
+            - name: BESU_MIN_GAS_PRICE
+              value: "0"
+            - name: BESU_SYNC_MODE
+              value: "FULL"
+            - name: BESU_HOST_ALLOWLIST
+              value: "*"
+            - name: BESU_P2P_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: BESU_P2P_PORT
+              value: "30303"
+            - name: BESU_GRAPHQL_HTTP_ENABLED
+              value: "false"
+            - name: BESU_METRICS_ENABLED
+              value: "false"
+            - name: BESU_METRICS_HOST
+              value: "0.0.0.0"
+            - name: BESU_METRICS_PORT
+              value: "9545"
+            - name: BESU_METRICS_CATEGORY
+              value: "BLOCKCHAIN,ETHEREUM,JVM,PROCESS,TRANSACTION_POOL"
+            - name: BESU_RPC_HTTP_ENABLED
+              value: "true"
+            - name: BESU_RPC_HTTP_HOST
+              value: "0.0.0.0"
+            - name: BESU_RPC_HTTP_PORT
+              value: "8545"
+            - name: BESU_RPC_HTTP_API
+    #          value: "NET,ETH,WEB3,IBFT,PERM,TXPOOL,DEBUG,TRACE"
+    #          value: "ADMIN,NET,ETH,WEB3,IBFT,PERM,EEA,PRIV,TXPOOL"
+              value: "ADMIN,NET,ETH,WEB3,IBFT,PERM,TXPOOL,DEBUG,TRACE"
+            - name: BESU_RPC_HTTP_CORS_ORIGINS
+              value: "*"
+            - name: BESU_RPC_WS_ENABLED
+              value: "true"
+            - name: BESU_RPC_WS_HOST
+              value: "0.0.0.0"
+            - name: BESU_RPC_WS_PORT
+              value: "8546"
+            - name: BESU_RPC_WS_API
+    #          value: "NET,ETH,WEB3,EEA,PRIV"
+              value: "NET,ETH,WEB3"
+            - name: BESU_RPC_HTTP_AUTHENTICATION_ENABLED
+              value: "false"
+            # - name: BESU_RPC_HTTP_AUTHENTICATION_JWT_PUBLIC_KEY_FILE
+            #   value: "/opt/besu/conf/http-jwt-pubkey.pem"
+            - name: BESU_RPC_WS_AUTHENTICATION_ENABLED
+              value: "false"
+            # - name: BESU_RPC_WS_AUTHENTICATION_JWT_PUBLIC_KEY_FILE
+            #   value: "/opt/besu/conf/ws-jwt-pubkey.pem"
+            - name: BESU_PRUNING_ENABLED
+              value: "false"
+            - name: BESU_PERMISSIONS_NODES_CONFIG_FILE_ENABLED
+              value: "false"
+            # - name: BESU_PERMISSIONS_NODES_CONFIG_FILE
+            #   value: "/data/permissions_config.toml"
+            - name: BESU_TX_POOL_RETENTION_HOURS
+              value: "1"
+            - name: BESU_TX_POOL_RETENTION_MINUTES
+              value: "5"
+            - name: BESU_REVERT_REASON_ENABLED
+              value: "true"
+            - name: BESU_TX_POOL_MAX_SIZE
+              value: "18000"
+            - name: BESU_PRIVACY_ENABLED
+              value: "false"
+    #        - name: BESU_PRIVACY_URL
+    #          value: "http://10.178.94.228:8888"
+    #        - name: BESU_PRIVACY_MULTI_TENANCY_ENABLED
+    #          value: "true"
+            # - name: BESU_BOOTNODES
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: kbsec-mainnet-initializer-bootnode
+            #       key: bootnodes
+    #        - name: PERMISSION_CONFIG
+    #          valueFrom:
+    #            configMapKeyRef:
+    #              name: kbsec-mainnet-permission
+    #              key: permissions_config.toml
+            - name: BESU_AUTO_LOG_BLOOM_CACHING_ENABLED
+              value: "true"
+            - name: BESU_RPC_HTTP_MAX_ACTIVE_CONNECTIONS
+              value: "2048"
+          ports:
+            - name: rpc-port
+              containerPort: 8545
+            - name: ws-port
+              containerPort: 8546
+            - name: p2p-port
+              containerPort: 30303
+          volumeMounts:
+            - name: key
+              mountPath: /secrets
+              readOnly: true
+            - name: genesis-config
+              mountPath: /etc/genesis
+              readOnly: true
+            - name: data
+              mountPath: /data
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              exec /opt/besu/bin/besu \
+                --Xdns-enabled=true --Xdns-update-enabled=true --Xnat-kube-service-name=besu-validator4 \
+                --bootnodes=enode://${VALIDATOR1_PUBKEY}@validator1-0.besu-validator1.besu.svc.cluster.local:30303,enode://${VALIDATOR2_PUBKEY}@validator2-0.besu-validator2.besu.svc.cluster.local:30303
+      volumes:
+        - name: key
+          secret:
+            secretName: besu-validator4-key
+        - name: genesis-config
+          configMap:
+            name: besu-genesis-configmap
+        - name: data
+          emptyDir:
+            sizeLimit: "30Gi"
