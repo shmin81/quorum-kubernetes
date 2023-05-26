@@ -40,7 +40,7 @@ data:
   SHOW_TESTNET_LABEL: "true"
   TESTNET_LABEL_TEXT: "Local Dev Testnet"
   #TESTNET_LABEL_TEXT: "Testnet"
-  SUPPORTED_CHAINS: '[ {"title": "Dev Chainz", "url": "https://dev-block-explorer.chainz.biz/"}, {"title": "Dev Chainz", "url": "https://dev-test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Chainz", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
+  SUPPORTED_CHAINS: '[ {"title": "Chainz", "url": "https://block-explorer.chainz.biz/"}, {"title": "Chainz", "url": "https://test-block-explorer.chainz.biz/", "test_net?": true}, {"title": "Ethereum", "url": "https://blockscout.com/eth/mainnet/", "other?": true} ]'
   APPS_MENU: "true" # default false => API 서비스 등 연결할 것이 있다면 사용
   APPS: '[ {"title": "Chainz API Service", "url": "https://apiservice.chainz.biz/"} ]'
 
