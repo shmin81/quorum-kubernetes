@@ -29,7 +29,7 @@ data:
 
     # Transaction Pool
     tx-pool-retention-hours=1
-    tx-pool-max-size=128
+    tx-pool-max-size=1024
 
     # P2P network
     p2p-enabled=true
@@ -74,3 +74,9 @@ data:
     # ETC
     auto-log-bloom-caching-enabled=false
     revert-reason-enabled=false
+
+    # SK
+    tx-pool-tx-inflow-control-enabled=true
+    tx-pool-tx-inflow-max-size=1000
+    tx-pool-enterprise-pending-tx-sorter-enabled=true
+    tx-pool-retention-minutes=5
