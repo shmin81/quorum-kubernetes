@@ -20,8 +20,9 @@ spec:
         - name: postgre
           image: postgres:14
           imagePullPolicy: IfNotPresent
-          # 공유 버퍼의 크기는 기본 32M 이지만, 서버 메모리 기준으로 1/4 ~ 1/2 정도로 할당
-          args: ["-c", "shared_buffers=256MB", "-c", "max_connections=500"]
+          # 공유 버퍼의 크기는 기본 32M 이지만, 서버 메모리 기준으로 1/4 ~ 1/3 정도로 할당 https://pgtune.leopard.in.ua/ 
+          args: ["-c", "shared_buffers=256MB", "-c", "max_connections=200"]
+          #args: ["-c", "shared_buffers=256MB", "-c", "max_connections=200", "-c", "effective_cache_size=750MB", "-c", "maintenance_work_mem=64MB", "-c", "wal_buffers=7864kB"]
           resources:
             requests:
               cpu: 1024m
@@ -54,6 +55,9 @@ spec:
           ports:
             - containerPort: 5432
       volumes:
+        # - name: db-data-path # 왜 안될까? -> 초기 실행시, postgrex 폴더의 권한이 바뀌면서 안되는 듯...
+        #   hostPath:
+        #     path: /Users/a06837/Downloads/SW/Temp/postgrex
         - name: db-data
           emptyDir:
             sizeLimit: "30Gi"

@@ -17,7 +17,7 @@ spec:
       labels:
         app: blockscout
       annotations:
-        prometheus.io/scrape: "true"
+        prometheus.io/scrape: "false"
         prometheus.io/port: "4000"
         prometheus.io/path: "/metrics"
     spec:
