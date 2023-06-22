@@ -35,7 +35,6 @@ subjects:
     name: member1-sa
     namespace: besu
 
-
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -69,7 +68,7 @@ spec:
             - "curl -X GET --connect-timeout 30 --max-time 10 --retry 6 --retry-delay 0 --retry-max-time 300 ${BESU_VALIDATOR1_SERVICE_HOST}:8545/liveness"
       containers:
         - name: member1-besu
-          image: chainz/besu:21.10.9.2-RC1
+          image: chainz/besu:21.10.9.5
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -97,10 +96,14 @@ spec:
                 configMapKeyRef:
                   name: besu-validators-configmap
                   key: validator2PubKey
-            - name: BESU_TX_POOL_USE_COST_FREE_PENDING_TX_SORTER
-              value: "true"
-            - name: BESU_TX_POOL_SET_ACCOUNT_TX_ORDER_TYPE
-              value: "2"
+            - name: BESU_OPTS
+              #value: "-Xmx1g"
+              value: "-Xmx256m"
+            ### Besu에서 config 파일보다 환경변수 값이 우선하여 적용되는 것으로 보임
+            # - name: BESU_TX_POOL_RETENTION_MINUTES
+            #   value: "5"
+            - name: BESU_IDENTITY
+              value: "member1"
           volumeMounts:
             - name: key
               mountPath: /secrets
@@ -136,8 +139,7 @@ spec:
             - -c
           args:
             - |
-              exec
-              /opt/besu/bin/besu \
+              exec /opt/besu/bin/besu \
                 --node-private-key-file=/secrets/nodekey \
                 --config-file=/etc/besu/config.toml \
                 --Xdns-enabled=true --Xdns-update-enabled=true --Xnat-kube-service-name=besu-member1 \
@@ -147,15 +149,15 @@ spec:
         - name: key
           secret:
             secretName: besu-member1-key
-        - name: config-toml
-          configMap:
-            name: besu-config-toml-configmap
         - name: genesis-config
           configMap:
             name: besu-genesis-configmap
+        - name: config-toml
+          configMap:
+            name: besu-config-toml-configmap
         - name: node-permissions
           configMap:
             name: besu-node-permissions-configmap
         - name: data
           emptyDir:
-            sizeLimit: "1Gi"
+            sizeLimit: "5Gi"

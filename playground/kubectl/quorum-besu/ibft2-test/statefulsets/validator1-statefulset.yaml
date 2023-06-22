@@ -61,7 +61,7 @@ spec:
       serviceAccountName: validator1-sa
       containers:
         - name: validator1
-          image: chainz/besu:21.10.9.1-JDK
+          image: chainz/besu:21.10.9.5
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -89,10 +89,14 @@ spec:
                 configMapKeyRef:
                   name: besu-validators-configmap
                   key: validator2PubKey
-            - name: BESU_TX_POOL_USE_COST_FREE_PENDING_TX_SORTER
-              value: "true"
-            - name: BESU_TX_POOL_SET_ACCOUNT_TX_ORDER_TYPE
-              value: "2"
+            - name: BESU_OPTS
+              #value: "-Xmx1g"
+              value: "-Xmx384m"
+            ### Besu에서 config 파일보다 환경변수 값이 우선하여 적용되는 것으로 보임
+            # - name: BESU_TX_POOL_RETENTION_MINUTES
+            #   value: "10"
+            - name: BESU_IDENTITY
+              value: "validator1"
           volumeMounts:
             - name: key
               mountPath: /secrets
@@ -148,4 +152,4 @@ spec:
             name: besu-node-permissions-configmap
         - name: data
           emptyDir:
-            sizeLimit: "1Gi"
+            sizeLimit: "5Gi"

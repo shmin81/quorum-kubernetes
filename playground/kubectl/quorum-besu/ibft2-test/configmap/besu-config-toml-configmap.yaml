@@ -25,9 +25,6 @@ data:
     logging="DEBUG"
 
     min-gas-price=0
-    # Transaction Pool
-    tx-pool-retention-hours=1
-    tx-pool-max-size=1024
 
     # P2P network
     p2p-enabled=true
@@ -68,3 +65,12 @@ data:
     permissions-nodes-config-file-enabled=true
     permissions-nodes-config-file="/etc/permissions/nodes-allowlist.yml"
 
+    # Transaction Pool
+    tx-pool-retention-hours=1
+    tx-pool-max-size=1024
+
+    # Desgined by SK
+    tx-pool-enterprise-pending-tx-sorter-enabled=true
+    tx-pool-retention-minutes=20
+    tx-pool-tx-inflow-control-enabled=true
+    tx-pool-tx-inflow-max-size=1000
