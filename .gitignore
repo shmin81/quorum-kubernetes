@@ -31,3 +31,5 @@ site/
 /kubernetes/besu-*.tar.gz
 .envrc
 .lh
+/delete
+/ibft2-3node-test-at-home
