@@ -82,7 +82,8 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: APP_NODE_URL
-              value: "http://besu-validator1.besu:8545"
+              value: "http://localhost:30055"  # can connet besu by NodePort
+              #value: "http://besu-validator1.besu:8545" # can not connet besu by ClusterIP
             - name: APP_NODE_JWT
               value: "no"
           ports:
