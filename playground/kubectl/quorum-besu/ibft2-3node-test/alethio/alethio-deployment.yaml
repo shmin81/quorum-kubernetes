@@ -1,0 +1,92 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: alethio
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/proxy
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups:
+      - extensions
+    resources:
+      - ingresses
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: alethio
+  namespace: monitoring
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: alethio
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: alethio
+subjects:
+  - kind: ServiceAccount
+    name: alethio
+    namespace: monitoring
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alethio
+  labels:
+    app: alethio
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alethio
+  template:
+    metadata:
+      labels:
+        app: alethio
+      annotations:
+        prometheus.io/scrape: "false"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: alethio
+      containers:
+        - name: alethio
+          image: chainz-explorer:1.0.3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 300m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: APP_NODE_URL
+              value: "http://besu-validator1.besu:8545"
+            - name: APP_NODE_JWT
+              value: "no"
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+
