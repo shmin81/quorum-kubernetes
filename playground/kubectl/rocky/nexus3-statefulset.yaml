@@ -1,0 +1,102 @@
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nexus3u-sa
+  namespace: besu
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nexus3u-key-read-role
+  namespace: besu
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: [ besu-nexus3u-key ]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: nexus3u-rb
+  namespace: besu
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: nexus3u-key-read-role
+subjects:
+  - kind: ServiceAccount
+    name: nexus3u-sa
+    namespace: besu
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nexus3u
+  labels:
+    app: nexus3u
+  namespace: besu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus3u
+  serviceName: besu-nexus3u
+  template:
+    metadata:
+      labels:
+        app: nexus3u
+    spec:
+      serviceAccountName: nexus3u-sa
+      containers:
+        - name: nexus3u
+          image: klo2k/nexus3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 2048m
+              memory: 1024Mi
+            limits:
+              cpu: 2048m
+              memory: 2048Mi
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            # - name: data
+            #   mountPath: /data
+            - name: hostpath-volume
+              mountPath: /nexus-data
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+            - containerPort: 5000
+              name: dock
+              protocol: TCP
+          # command:
+          #   - /bin/sh
+          #   - -c
+          # args:
+          #   - "sleep 100000"
+
+      volumes:
+        # - name: data
+        #   emptyDir:
+        #     sizeLimit: "5Gi"
+        - name: hostpath-volume
+          hostPath:
+            path: /Users/a06837/Downloads/SW/Temp/nexus-data
