@@ -17,5 +17,8 @@ yum install --downloadonly --downloaddir=. epel-release
 # Download (jemalloc-devel)
 yum install --downloadonly --downloaddir=. jemalloc-devel
 
-# Download (logrotate)
+# Download (logrotate) : Optional
 yum install --downloadonly --downloaddir=. logrotate
+
+# Download (findutils) : Optional
+yum install --downloadonly --downloaddir=. findutils
