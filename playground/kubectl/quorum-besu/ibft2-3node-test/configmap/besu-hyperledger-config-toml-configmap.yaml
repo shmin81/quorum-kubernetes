@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: besu-config-toml-configmap
+  name: besu-hyperledger-config-toml-configmap
   labels:
-    app: besu-config-toml-configmap
+    app: besu-hyperledger-config-toml-configmap
   namespace: besu
 data:
   config.toml: |-
@@ -26,18 +26,18 @@ data:
     logging="INFO"
 
     min-gas-price=0
-    sync-mode="FULL"
-    # sync-mode="FAST"
-    # fast-sync-min-peers=2
+    #sync-mode="FULL"
+    sync-mode="FAST"
+    fast-sync-min-peers=2
 
     # P2P network
     p2p-enabled=true
     discovery-enabled=true
     #p2p-host="0.0.0.0"
     p2p-port=30303
-
-    max-peers=10
-    Xp2p-peer-lower-bound=10
+    
+    max-peers=5
+    Xp2p-peer-lower-bound=5
     # https://besu.hyperledger.org/public-networks/how-to/connect/manage-peers
     remote-connections-limit-enabled=false
     random-peer-priority-enabled=true
@@ -70,25 +70,17 @@ data:
     metrics-enabled=true
     metrics-host="0.0.0.0"
     metrics-port=9545
-    #metrics-category=["BLOCKCHAIN","ETHEREUM","PROCESS","JVM","TRANSACTION_POOL"]
-    #metrics-category=["BLOCKCHAIN","ETHEREUM","EXECUTORS","JVM","NETWORK","PEERS","PERMISSIONING","PROCESS","PRUNER","RPC","STRATUM","SYNCHRONIZER","TRANSACTION_POOL","KVSTORE_ROCKSDB","KVSTORE_ROCKSDB_STATS"]
-    metrics-category=["BLOCKCHAIN","ETHEREUM","EXECUTORS","JVM","NETWORK","PEERS","PERMISSIONING","PROCESS","PRUNER","RPC","STRATUM","SYNCHRONIZER","TRANSACTION_POOL","KVSTORE_ROCKSDB_STATS"]
+    metrics-category=["BLOCKCHAIN","ETHEREUM","EXECUTORS","JVM","NETWORK","PEERS","PERMISSIONING","PROCESS","PRUNER","RPC","STRATUM","SYNCHRONIZER","TRANSACTION_POOL","KVSTORE_ROCKSDB","KVSTORE_ROCKSDB_STATS"]
 
     # Permissioning
-    permissions-nodes-config-file-enabled=false
+    #permissions-accounts-config-file-enabled=false
+    #permissions-nodes-config-file-enabled=false
 
     # ETC
-    auto-log-bloom-caching-enabled=false
+    auto-log-bloom-caching-enabled=true
     revert-reason-enabled=false
 
     # Transaction Pool
-    tx-pool-retention-hours=1
-    tx-pool-max-size=1024
-    tx-pool-limit-by-account-percentage=0.5
-
-    # Desgined by SK
-    tx-pool-enterprise-pending-tx-sorter-enabled=true
-    tx-pool-retention-minutes=10
-    tx-pool-tx-inflow-control-enabled=true
-    tx-pool-tx-inflow-max-size=1000
-    
+    #tx-pool="legacy"
+    #tx-pool-retention-hours=1
+    #tx-pool-max-size=1024
