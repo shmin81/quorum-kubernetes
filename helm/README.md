@@ -9,8 +9,8 @@ cluster:
   cloudNativeServices: false # set to true to use Cloud Native Services (SecretsManager and IAM for AWS; KeyVault & Managed Identities for Azure)
 
 aws:
-  # the aws cli commands uses the name 'quorum-node-secrets-sa' so only change this if you altered the name
-  serviceAccountName: quorum-node-secrets-sa
+  # the aws cli commands uses the name 'quorum-sa' so only change this if you altered the name
+  serviceAccountName: quorum-sa
   # the region you are deploying to
   region: ap-southeast-2
 
@@ -107,7 +107,14 @@ helm install quorum-monitoring-ingress ingress-nginx/ingress-nginx \
     --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux \
     --set controller.admissionWebhooks.patch.nodeSelector."kubernetes\.io/os"=linux \
     --set controller.service.externalTrafficPolicy=Local
+```
 
+Change Configmap of ingress nginx controller
+```
+kubectl edit -n quorum configmaps quorum-monitoring-ingress-ingress-nginx-controller
+```
+Then set `allow-snippet-annotations: "true"`
+```
 kubectl apply -f ../ingress/ingress-rules-monitoring.yml
 ```
 
@@ -256,7 +263,14 @@ helm install quorum-network-ingress ingress-nginx/ingress-nginx \
     --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux \
     --set controller.admissionWebhooks.patch.nodeSelector."kubernetes\.io/os"=linux \
     --set controller.service.externalTrafficPolicy=Local
+```
 
+Change Configmap of ingress nginx controller
+```
+kubectl edit -n quorum configmaps quorum-network-ingress-ingress-nginx-controller
+```
+Then set `allow-snippet-annotations: "true"`
+```
 kubectl apply -f ../ingress/ingress-rules-goquorum.yml
 ```
 
